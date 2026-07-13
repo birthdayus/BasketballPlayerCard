@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fantasy Card Studio — 打造你的專屬球員海報卡</title>
+<title>Fantasy Card Studio — 打造你的專屬球員交易卡</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
@@ -53,75 +53,8 @@
     box-shadow: 0 25px 60px -15px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06);
   }
 
-  /* ================= FRONT — headline poster, shared background, side-by-side ================= */
-  .card-front{ background:#F3EEE4; transform: rotateY(0deg); }
-  .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.05; mix-blend-mode:multiply; pointer-events:none; z-index:1; }
-  .paper-blob{ position:absolute; border-radius:50%; pointer-events:none; z-index:0; }
-  .paper-blob-a{ width:75%; aspect-ratio:1; top:-20%; left:-24%; background:radial-gradient(circle, rgba(var(--ink-rgb),.32) 0%, rgba(var(--ink-rgb),0) 68%); }
-  .paper-blob-b{ width:70%; aspect-ratio:1; bottom:-16%; left:0%; background:radial-gradient(circle, rgba(var(--accent-rgb),.26) 0%, rgba(var(--accent-rgb),0) 68%); }
-
-  .front-photo-zone{ position:absolute; top:0; right:0; bottom:0; width:54%; overflow:hidden; background:#1b1f29; z-index:1; }
-  .photo-fade-edge{
-    position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(90deg, #F3EEE4 0%, rgba(243,238,228,.9) 16%, rgba(243,238,228,.35) 34%, rgba(243,238,228,0) 56%);
-  }
-  .photo-bottom-vignette{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, transparent 62%, rgba(0,0,0,.35) 100%); }
-
-  .front-text-col{
-    position:relative; z-index:2; height:100%; width:62%;
-    padding:16px 10px 14px 16px;
-    display:flex; flex-direction:column; gap:9px;
-  }
-
-  .poster-topbar{ display:flex; align-items:center; gap:8px; }
-  .team-badge{
-    width:26px; height:26px; border-radius:50%; background:var(--ink); color:#fff;
-    font-weight:800; font-size:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
-  }
-  .team-badge.sm{ width:17px; height:17px; font-size:7.5px; }
-  .team-badge.alt{ background:var(--accent); color:#1a1305; }
-  .poster-topbar-team{ font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:#2a251c; opacity:.85; font-weight:800; }
-
-  .poster-headline{ margin-top:2px; }
-  .headline-number{ font-size:74px; line-height:.8; color:var(--ink); }
-  .headline-label{ font-size:25px; color:var(--accent); margin-top:-6px; text-shadow:1px 1px 0 rgba(0,0,0,.06); }
-
-  .poster-meta{ font-size:9px; letter-spacing:.09em; text-transform:uppercase; color:#5b5346; font-weight:700; }
-
-  .poster-matchup{ display:flex; align-items:center; gap:6px; padding:6px 0; border-top:1px solid rgba(0,0,0,.12); border-bottom:1px solid rgba(0,0,0,.12); flex-wrap:wrap; }
-  .matchup-team{ display:flex; align-items:center; gap:4px; font-size:8px; font-weight:700; text-transform:uppercase; color:#2a251c; }
-  .matchup-score{ font-family:'Anton'; font-size:15px; color:var(--ink); margin-left:1px; }
-  .matchup-vs{ font-size:7px; color:#8a8272; font-weight:800; }
-
-  .poster-stats{ display:flex; flex-direction:column; }
-  .stat-row{ display:flex; align-items:baseline; gap:9px; padding:3px 0; border-bottom:1px solid rgba(0,0,0,.08); }
-  .stat-num{ font-size:17px; color:#231f18; min-width:38px; }
-  .stat-label{ font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; }
-
-  .poster-quote{ padding-left:8px; border-left:3px solid var(--ink); }
-  .poster-quote p{ font-size:9.5px; font-style:italic; color:#2a251c; line-height:1.32; }
-  .quote-sig{ display:block; font-size:7.5px; margin-top:2px; color:#847c6c; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
-
-  .poster-achievement{ margin-top:auto; padding-top:8px; border-top:2px solid var(--ink); }
-  .ach-caption{ font-family:'Anton'; font-size:15px; color:var(--ink); }
-  .ach-sub{ font-size:7px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; margin-top:1px; }
-
-  .poster-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:1px solid rgba(0,0,0,.08); z-index:3; }
-
-  /* ================= BACK — full photo with player info overlay ================= */
-  .card-back{ transform: rotateY(180deg); background:#1b1f29; }
-  .back-scrim{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.9) 100%); }
-  .ghost-number{
-    position:absolute; right:-.03em; bottom:-.05em; line-height:.8;
-    font-size:150px; color: rgba(255,255,255,.14);
-    -webkit-text-stroke: 1.5px rgba(255,255,255,.25);
-    pointer-events:none;
-  }
-  .back-pos-badge{ position:absolute; top:16px; left:16px; padding:5px 10px; border-radius:8px; font-size:11px; font-weight:800; letter-spacing:.05em; background:var(--ink); color:#fff; }
-  .back-league{ position:absolute; top:16px; right:16px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.7); }
-  .back-info{ position:absolute; left:16px; right:16px; bottom:20px; }
-  .back-team{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:2px; }
-  .card-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:2px solid rgba(255,255,255,.32); }
+  /* ================= FRONT — Topps-style ribbon + banner + ticket cells ================= */
+  .card-back{ transform: rotateY(180deg); }
 
   .photo-wrap{ position:absolute; inset:0; overflow:hidden; background:#1b1f29; }
   .photo-wrap img{
@@ -136,11 +69,81 @@
     background: linear-gradient(160deg,#1b2030,#0d1017);
     color:#3a4257;
   }
+  .front-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,.42) 66%, rgba(0,0,0,.88) 100%); }
+
+  .front-chrome{ position:absolute; inset:0; z-index:2; pointer-events:none; }
+
+  .ticket-block{ position:absolute; top:14px; left:14px; width:66%; border-radius:8px; overflow:hidden; background:rgba(255,255,255,.96); }
+  .ticket-brandrow{ display:flex; align-items:center; justify-content:space-between; background:var(--ink); color:#fff; padding:5px 9px; }
+  .ticket-brand{ font-family:'Anton'; font-size:11px; line-height:1; letter-spacing:.02em; }
+  .ticket-serial{ font-size:9px; font-weight:700; opacity:.9; }
+  .ticket-title{ font-family:'Anton'; font-size:14px; color:#1a1305; background:var(--accent); padding:5px 9px; }
+  .ticket-cells{ display:flex; }
+  .ticket-cell{ flex:1; text-align:center; padding:5px 2px 6px; border-right:1px solid rgba(0,0,0,.1); }
+  .ticket-cell:last-child{ border-right:none; }
+  .tc-label{ font-size:6.5px; letter-spacing:.06em; text-transform:uppercase; color:#6b6559; font-weight:800; }
+  .tc-value{ font-family:'Anton'; font-size:15px; color:#1a1a1a; }
+
+  .front-signature{ position:absolute; top:56%; left:16px; right:60px; color:var(--ink); font-size:30px; line-height:1; transform:rotate(-3deg); transform-origin:left center; text-shadow:0 1px 3px rgba(255,255,255,.35); }
+
+  .front-banner{ position:absolute; left:0; right:0; bottom:52px; background:var(--ink); color:#fff; padding:6px 16px; }
+  .banner-caption{ font-family:'Anton'; font-size:14px; line-height:1.1; }
+  .banner-sub{ font-size:8px; letter-spacing:.08em; text-transform:uppercase; opacity:.85; margin-top:1px; }
+
+  .front-nameplate{ position:absolute; left:0; right:0; bottom:10px; height:42px; background:#141414; display:flex; align-items:center; padding:0 16px; }
+  .nameplate-name{ font-family:'Anton'; font-size:22px; color:#fff; letter-spacing:.01em; }
+
+  .front-crest{
+    position:absolute; bottom:8px; right:10px; width:36px; height:36px;
+    background:var(--accent); transform:rotate(45deg); border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .front-crest span{ transform:rotate(-45deg); font-family:'Anton'; font-size:11px; color:#1a1305; }
+
+  .front-corner-tag{ position:absolute; bottom:16px; right:52px; font-family:'Anton'; font-size:12px; color:#fff; opacity:.9; }
+
+  .front-gold-strip{ position:absolute; left:0; right:0; bottom:0; height:10px; background:repeating-linear-gradient(115deg, var(--accent) 0 4px, rgba(0,0,0,.55) 4px 8px); }
+
+  /* ================= BACK — bio + big-number comparison, Upper-Deck style ================= */
+  .card-back-inner{ position:relative; height:100%; background:#F3EEE4; }
+  .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.05; mix-blend-mode:multiply; pointer-events:none; z-index:0; }
+
+  .back-content{ position:relative; z-index:1; height:100%; padding:16px 16px 12px; display:flex; flex-direction:column; gap:8px; }
+
+  .back-topbar{ display:flex; align-items:center; gap:8px; }
+  .team-badge{ width:26px; height:26px; border-radius:50%; background:var(--ink); color:#fff; font-weight:800; font-size:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .back-topbar-team{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#2a251c; font-weight:800; }
+
+  .back-bio-box{ border:1px solid rgba(0,0,0,.16); border-radius:10px; padding:9px 11px; }
+  .bio-eyebrow{ font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); font-weight:800; margin-bottom:3px; }
+  .bio-text{ font-size:9.5px; line-height:1.34; color:#2a251c; }
+
+  .back-highlight-zone{ position:relative; padding:6px 0; }
+  .back-diagonal-accent{ position:absolute; top:-20%; right:-18%; width:75%; height:150%; background:var(--ink); opacity:.10; transform:rotate(16deg); z-index:0; border-radius:12px; }
+  .back-stat-hero-row{ position:relative; z-index:1; display:flex; align-items:center; gap:10px; padding:5px 0; }
+  .back-stat-hero-num{ font-family:'Anton'; font-size:38px; color:var(--ink); min-width:66px; line-height:1; }
+  .back-stat-hero-thumb{ width:36px; height:36px; border-radius:50%; overflow:hidden; border:2px solid var(--ink); flex-shrink:0; background:#1b1f29; }
+  .back-stat-hero-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .back-stat-hero-label{ font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:#3a352b; line-height:1.2; }
+  .back-stat-hero-label small{ display:block; font-size:7px; font-weight:700; color:#8a8272; letter-spacing:.08em; }
+
+  .back-matchup-line{ font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:#5b5346; font-weight:700; }
+
+  .back-stats{ display:flex; flex-direction:column; }
+  .stat-row{ display:flex; align-items:baseline; gap:9px; padding:2.5px 0; border-bottom:1px solid rgba(0,0,0,.08); }
+  .stat-num{ font-size:15px; color:#231f18; min-width:34px; }
+  .stat-label{ font-size:7.5px; letter-spacing:.08em; text-transform:uppercase; color:#847c6c; font-weight:700; }
+
+  .back-footer{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:7px; border-top:1px solid rgba(0,0,0,.12); }
+  .footer-brand{ font-size:7.5px; font-weight:800; letter-spacing:.07em; color:#5b5346; text-transform:uppercase; }
+  .footer-serial{ font-size:7.5px; font-weight:700; color:#5b5346; }
+
+  .card-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:2px solid rgba(255,255,255,.32); z-index:3; }
 
   /* ---- anime mode filter (clearly visible, html2canvas-safe) ---- */
   .anime-mode .photo-wrap img{ filter: saturate(2.3) contrast(1.4) brightness(1.1); }
   .anime-mode .anime-overlay{ opacity:1; }
-  .anime-overlay{ position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .35s ease; }
+  .anime-overlay{ position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .35s ease; z-index:1; }
   .anime-wash{
     position:absolute; inset:0;
     background: linear-gradient(135deg, rgba(255,60,180,.4) 0%, transparent 45%, rgba(0,220,255,.4) 100%);
@@ -158,11 +161,8 @@
       repeating-linear-gradient(-70deg, rgba(255,255,255,.14) 0 1.5px, transparent 1.5px 20px);
     mix-blend-mode: screen; opacity:.4;
   }
-  .card-front.anime-mode .front-photo-zone{ box-sizing:border-box; border-left:4px solid var(--accent); }
-  .card-front.anime-mode .headline-number{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.6); }
-  .card-back.anime-mode .card-border-frame{ border:4px solid var(--accent); }
-  .card-back.anime-mode #playerNameBack,
-  .card-back.anime-mode #numberBack{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.5); }
+  .card-front.anime-mode .ticket-block{ border:3px solid var(--accent); box-sizing:border-box; }
+  .card-front.anime-mode .front-signature{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.5); }
 
   ::-webkit-scrollbar{ width:8px; }
   ::-webkit-scrollbar-thumb{ background:#2a2f3c; border-radius:8px; }
@@ -183,8 +183,8 @@
   <aside class="panel-bg border-r border-white/5 lg:h-screen lg:overflow-y-auto p-6 space-y-8">
     <header class="space-y-1">
       <p class="field-label text-[#FF6B35]">Fantasy Card Studio</p>
-      <h1 class="font-display text-3xl">打造你的球員海報卡</h1>
-      <p class="text-sm text-[#8B93A7]">直向設計，貼合手機桌布比例；填好資料即時預覽，完成後一鍵下載高解析度 PNG。</p>
+      <h1 class="font-display text-3xl">打造你的球員交易卡</h1>
+      <p class="text-sm text-[#8B93A7]">正面仿簽名卡設計，背面仿球員小傳卡；填好資料即時預覽，完成後下載高解析度 PNG。</p>
     </header>
 
     <!-- 個人資料 -->
@@ -260,35 +260,39 @@
 
     <div class="h-px bg-white/5"></div>
 
-    <!-- 焦點戰績 -->
+    <!-- 正面卡片資訊 -->
     <section class="space-y-3">
       <div class="flex items-center gap-2 text-sm font-semibold text-white/90">
-        <i data-lucide="flame" class="w-4 h-4 text-[#FF6B35]"></i> 焦點戰績（海報大數字）
+        <i data-lucide="ticket" class="w-4 h-4 text-[#FF6B35]"></i> 正面卡片資訊
       </div>
       <div class="grid grid-cols-2 gap-3">
         <label class="block">
-          <span class="field-label">焦點數字</span>
-          <input id="headlineNumber" type="text" value="36" maxlength="4" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
+          <span class="field-label">品牌字樣</span>
+          <input id="cardBrand" type="text" value="Fantasy Now" maxlength="16" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
         <label class="block">
-          <span class="field-label">焦點文字</span>
-          <input id="headlineLabel" type="text" value="Career High" maxlength="16" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+          <span class="field-label">限量編號</span>
+          <input id="serialNumber" type="text" value="1/1" maxlength="10" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
         </label>
         <label class="col-span-2 block">
-          <span class="field-label">比賽資訊（日期・場地）</span>
-          <input id="gameMeta" type="text" value="Season Opener · Home Court" maxlength="46" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+          <span class="field-label">飛紙橫額標題</span>
+          <input id="headlineLabel" type="text" value="Career Highlight" maxlength="20" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+        </label>
+        <label class="block">
+          <span class="field-label">右下角編號</span>
+          <input id="headlineNumber" type="text" value="36" maxlength="6" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
+        </label>
+        <label class="block">
+          <span class="field-label">簽名題字</span>
+          <input id="quoteText" type="text" value="Straight Buckets" maxlength="26" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
         <label class="col-span-2 block">
-          <span class="field-label">對手隊伍</span>
-          <input id="opponentTeam" type="text" value="Rival City Hoopers" maxlength="22" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+          <span class="field-label">成就橫額標題</span>
+          <input id="achCaption" type="text" value="Fan Favorite" maxlength="24" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
-        <label class="block">
-          <span class="field-label">主隊比分</span>
-          <input id="homeScore" type="number" value="112" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
-        </label>
-        <label class="block">
-          <span class="field-label">客隊比分</span>
-          <input id="awayScore" type="number" value="104" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
+        <label class="col-span-2 block">
+          <span class="field-label">成就橫額副標</span>
+          <input id="achSub" type="text" value="Custom Fantasy Highlight Card" maxlength="34" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
       </div>
     </section>
@@ -327,23 +331,31 @@
 
     <div class="h-px bg-white/5"></div>
 
-    <!-- 語錄與成就 -->
+    <!-- 背面小傳與賽事 -->
     <section class="space-y-3">
       <div class="flex items-center gap-2 text-sm font-semibold text-white/90">
-        <i data-lucide="quote" class="w-4 h-4 text-[#FF6B35]"></i> 語錄與成就
+        <i data-lucide="scroll-text" class="w-4 h-4 text-[#FF6B35]"></i> 背面小傳與賽事
       </div>
       <label class="block">
-        <span class="field-label">球員語錄</span>
-        <textarea id="quoteText" rows="2" maxlength="110" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm resize-none">I don't just play the game — I am the game.</textarea>
+        <span class="field-label">球員小傳</span>
+        <textarea id="bioText" rows="3" maxlength="220" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm resize-none">Elmo learned the crossover before the alphabet. Now the league's most electric playmaker, he turns every home game into can't-miss TV.</textarea>
       </label>
       <div class="grid grid-cols-2 gap-3">
-        <label class="block">
-          <span class="field-label">成就標題</span>
-          <input id="achCaption" type="text" value="Fan Favorite" maxlength="18" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+        <label class="col-span-2 block">
+          <span class="field-label">比賽資訊（日期・場地）</span>
+          <input id="gameMeta" type="text" value="Season Opener · Home Court" maxlength="46" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+        </label>
+        <label class="col-span-2 block">
+          <span class="field-label">對手隊伍</span>
+          <input id="opponentTeam" type="text" value="Rival City Hoopers" maxlength="22" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
         <label class="block">
-          <span class="field-label">成就副標</span>
-          <input id="achSub" type="text" value="Custom Fantasy Highlight Card" maxlength="30" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
+          <span class="field-label">主隊比分</span>
+          <input id="homeScore" type="number" value="112" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
+        </label>
+        <label class="block">
+          <span class="field-label">客隊比分</span>
+          <input id="awayScore" type="number" value="104" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
         </label>
       </div>
     </section>
@@ -353,12 +365,12 @@
     <!-- 卡片控制 -->
     <section class="space-y-3">
       <button id="flipBtn" class="w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold bg-white/5 border border-white/10 hover:bg-white/10 transition">
-        <i data-lucide="repeat-2" class="w-4 h-4"></i> 翻轉卡片（海報 / 純相片桌布）
+        <i data-lucide="repeat-2" class="w-4 h-4"></i> 翻轉卡片（正面 / 背面）
       </button>
       <button id="downloadBtn" class="w-full flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold bg-[#FF6B35] hover:bg-[#ff7d4f] text-black transition">
-        <i data-lucide="download" class="w-4 h-4"></i> 下載目前這一面（手機桌布 PNG）
+        <i data-lucide="download" class="w-4 h-4"></i> 下載目前這一面（PNG）
       </button>
-      <p class="text-xs text-[#8B93A7] text-center">匯出解析度約 1170 × 2532，適合大部分手機螢幕</p>
+      <p class="text-xs text-[#8B93A7] text-center">匯出解析度約 1170 × 2532</p>
     </section>
   </aside>
 
@@ -367,82 +379,9 @@
     <div id="cardStage" class="card-stage">
       <div id="cardFlipper" class="card-flipper">
 
-        <!-- FRONT FACE — headline poster, left data / right bleeding photo, shared paper background -->
+        <!-- FRONT FACE -->
         <div id="cardFront" class="card-face card-front">
-          <div class="paper-grain"></div>
-          <div class="paper-blob paper-blob-a"></div>
-          <div class="paper-blob paper-blob-b"></div>
-
-          <div class="front-photo-zone">
-            <div class="photo-wrap" id="photoWrapFront">
-              <div class="photo-placeholder"><i data-lucide="image" class="w-10 h-10"></i></div>
-              <img class="cardPhoto hidden" src="" alt="">
-            </div>
-            <div class="anime-overlay">
-              <div class="anime-wash"></div>
-              <div class="anime-speedlines"></div>
-              <div class="anime-halftone"></div>
-            </div>
-            <div class="photo-bottom-vignette"></div>
-            <div class="photo-fade-edge"></div>
-          </div>
-
-          <div class="front-text-col">
-            <div class="poster-topbar">
-              <span class="team-badge" id="teamBadge">SA</span>
-              <span class="poster-topbar-team" id="teamNameFront">SESAME ALL-STARS</span>
-            </div>
-
-            <div class="poster-headline">
-              <div class="headline-number font-display" id="headlineNumberEl">36</div>
-              <div class="headline-label font-script" id="headlineLabelEl">Career High</div>
-            </div>
-
-            <p class="poster-meta" id="gameMetaEl">SEASON OPENER · HOME COURT</p>
-
-            <div id="posterStatsSection">
-              <div class="poster-matchup">
-                <div class="matchup-team">
-                  <span class="team-badge sm" id="teamBadgeSmall">SA</span>
-                  <span id="teamNameMatchup">SESAME</span>
-                  <span class="matchup-score" id="homeScoreEl">112</span>
-                </div>
-                <span class="matchup-vs">VS</span>
-                <div class="matchup-team">
-                  <span class="matchup-score" id="awayScoreEl">104</span>
-                  <span id="opponentNameEl">RIVAL CITY</span>
-                  <span class="team-badge sm alt" id="opponentBadge">RC</span>
-                </div>
-              </div>
-
-              <div class="poster-stats">
-                <div class="stat-row"><span class="stat-num font-display" id="rowG">82</span><span class="stat-label">G</span></div>
-                <div class="stat-row"><span class="stat-num font-display" id="rowPPG">25.4</span><span class="stat-label">PPG</span></div>
-                <div class="stat-row"><span class="stat-num font-display" id="rowRPG">6.8</span><span class="stat-label">RPG</span></div>
-                <div class="stat-row"><span class="stat-num font-display" id="rowAPG">5.2</span><span class="stat-label">APG</span></div>
-                <div class="stat-row"><span class="stat-num font-display" id="rowSPG">1.5</span><span class="stat-label">SPG</span></div>
-                <div class="stat-row"><span class="stat-num font-display" id="rowBPG">0.7</span><span class="stat-label">BPG</span></div>
-                <div class="stat-row"><span class="stat-num font-display" id="rowEFF">28.9</span><span class="stat-label">EFF</span></div>
-              </div>
-            </div>
-
-            <blockquote class="poster-quote" id="quoteBlock">
-              <p id="quoteTextEl">"I don't just play the game — I am the game."</p>
-              <span class="quote-sig" id="quoteSig">— ELMO #36</span>
-            </blockquote>
-
-            <div class="poster-achievement">
-              <p class="ach-caption" id="achCaptionEl">FAN FAVORITE</p>
-              <p class="ach-sub" id="achSubEl">CUSTOM FANTASY HIGHLIGHT CARD</p>
-            </div>
-          </div>
-
-          <div class="poster-border-frame"></div>
-        </div>
-
-        <!-- BACK FACE — full photo with player info overlay -->
-        <div id="cardBack" class="card-face card-back">
-          <div class="photo-wrap" id="photoWrapBack">
+          <div class="photo-wrap" id="photoWrapFront">
             <div class="photo-placeholder"><i data-lucide="image" class="w-14 h-14"></i></div>
             <img class="cardPhoto hidden" src="" alt="">
           </div>
@@ -451,15 +390,85 @@
             <div class="anime-speedlines"></div>
             <div class="anime-halftone"></div>
           </div>
-          <div class="back-scrim"></div>
-          <span class="ghost-number font-display" id="ghostNumber">36</span>
-          <div class="back-pos-badge" id="posBadge">G/F</div>
-          <div class="back-league">FANTASY EDITION</div>
-          <div class="back-info">
-            <p class="back-team font-mono-stat" id="teamNameBack" style="color:var(--accent);">Sesame All-Stars</p>
-            <div class="flex items-end justify-between">
-              <h2 class="font-display text-3xl leading-none text-white" id="playerNameBack">ELMO</h2>
-              <span class="font-display text-4xl leading-none opacity-90 text-white" id="numberBack">#36</span>
+          <div class="front-scrim"></div>
+
+          <div class="front-chrome">
+            <div class="ticket-block">
+              <div class="ticket-brandrow">
+                <span class="ticket-brand" id="cardBrandEl">FANTASY NOW</span>
+                <span class="ticket-serial" id="serialNumberEl">1/1</span>
+              </div>
+              <div class="ticket-title" id="headlineLabelEl">Career Highlight</div>
+              <div class="ticket-cells">
+                <div class="ticket-cell"><p class="tc-label">G</p><p class="tc-value" id="tcG">82</p></div>
+                <div class="ticket-cell"><p class="tc-label">PPG</p><p class="tc-value" id="tcPPG">25.4</p></div>
+                <div class="ticket-cell"><p class="tc-label">EFF</p><p class="tc-value" id="tcEFF">28.9</p></div>
+              </div>
+            </div>
+
+            <div class="front-signature font-script" id="quoteTextEl">Straight Buckets</div>
+
+            <div class="front-banner">
+              <p class="banner-caption" id="achCaptionEl">FAN FAVORITE</p>
+              <p class="banner-sub" id="achSubEl">CUSTOM FANTASY HIGHLIGHT CARD</p>
+            </div>
+
+            <div class="front-nameplate">
+              <span class="nameplate-name" id="playerNameFront">ELMO</span>
+            </div>
+            <span class="front-corner-tag" id="headlineNumberEl">36</span>
+            <div class="front-crest"><span id="teamBadgeFront">SA</span></div>
+            <div class="front-gold-strip"></div>
+          </div>
+
+          <div class="card-border-frame"></div>
+        </div>
+
+        <!-- BACK FACE -->
+        <div id="cardBack" class="card-face card-back">
+          <div class="card-back-inner">
+            <div class="paper-grain"></div>
+            <div class="back-content">
+              <div class="back-topbar">
+                <span class="team-badge" id="teamBadgeBack">SA</span>
+                <span class="back-topbar-team" id="teamNameBack">SESAME ALL-STARS</span>
+              </div>
+
+              <div class="back-bio-box">
+                <p class="bio-eyebrow">Player Bio</p>
+                <p class="bio-text" id="bioTextEl">Elmo learned the crossover before the alphabet.</p>
+              </div>
+
+              <div id="posterStatsSection">
+                <div class="back-highlight-zone">
+                  <div class="back-diagonal-accent"></div>
+                  <div class="back-stat-hero-row">
+                    <span class="back-stat-hero-num font-display" id="heroPPG">25.4</span>
+                    <span class="back-stat-hero-thumb"><img class="cardPhoto hidden" src="" alt=""></span>
+                    <span class="back-stat-hero-label">Points Per Game<small>Season Average</small></span>
+                  </div>
+                  <div class="back-stat-hero-row">
+                    <span class="back-stat-hero-num font-display" id="heroEFF">28.9</span>
+                    <span class="back-stat-hero-thumb"><img class="cardPhoto hidden" src="" alt=""></span>
+                    <span class="back-stat-hero-label">Efficiency Rating<small>Advanced Metric</small></span>
+                  </div>
+                </div>
+
+                <p class="back-matchup-line" id="matchupLine">SEASON OPENER · HOME COURT · W 112–104 VS RIVAL CITY HOOPERS</p>
+
+                <div class="back-stats">
+                  <div class="stat-row"><span class="stat-num font-display" id="rowG">82</span><span class="stat-label">Games Played</span></div>
+                  <div class="stat-row"><span class="stat-num font-display" id="rowRPG">6.8</span><span class="stat-label">Rebounds Per Game</span></div>
+                  <div class="stat-row"><span class="stat-num font-display" id="rowAPG">5.2</span><span class="stat-label">Assists Per Game</span></div>
+                  <div class="stat-row"><span class="stat-num font-display" id="rowSPG">1.5</span><span class="stat-label">Steals Per Game</span></div>
+                  <div class="stat-row"><span class="stat-num font-display" id="rowBPG">0.7</span><span class="stat-label">Blocks Per Game</span></div>
+                </div>
+              </div>
+
+              <div class="back-footer">
+                <span class="footer-brand">Fantasy Card Co.</span>
+                <span class="footer-serial" id="footerSerial">№ 1/1</span>
+              </div>
             </div>
           </div>
           <div class="card-border-frame"></div>
@@ -479,11 +488,13 @@ const state = {
   teamName: $('teamName'), teamColor: $('teamColor'), accentColor: $('accentColor'),
   photoScale: $('photoScale'), photoOffsetX: $('photoOffsetX'), photoOffsetY: $('photoOffsetY'),
   animeToggle: $('animeToggle'), statsToggle: $('statsToggle'),
+  cardBrand: $('cardBrand'), serialNumber: $('serialNumber'),
   headlineNumber: $('headlineNumber'), headlineLabel: $('headlineLabel'),
+  quoteText: $('quoteText'), achCaption: $('achCaption'), achSub: $('achSub'),
   gameMeta: $('gameMeta'), opponentTeam: $('opponentTeam'), homeScore: $('homeScore'), awayScore: $('awayScore'),
+  bioText: $('bioText'),
   statG: $('statG'), statPPG: $('statPPG'), statRPG: $('statRPG'), statAPG: $('statAPG'),
   statSPG: $('statSPG'), statBPG: $('statBPG'), statEFF: $('statEFF'),
-  quoteText: $('quoteText'), achCaption: $('achCaption'), achSub: $('achSub'),
 };
 
 const cardFront = $('cardFront');
@@ -505,38 +516,29 @@ function initials(name){
 function syncText(){
   const name = state.playerName.value.trim() || 'PLAYER';
   const num = state.playerNumber.value.trim() || '0';
-  const pos = state.playerPosition.value.trim() || '—';
   const team = state.teamName.value.trim() || 'FREE AGENTS';
   const opponent = state.opponentTeam.value.trim() || 'OPPONENT';
-  const hn = state.headlineNumber.value.trim() || '0';
-  const hl = state.headlineLabel.value.trim() || 'STAT';
   const meta = state.gameMeta.value.trim();
-  const quote = state.quoteText.value.trim();
-  const achC = state.achCaption.value.trim();
-  const achS = state.achSub.value.trim();
+  const hs = state.homeScore.value || '0';
+  const as = state.awayScore.value || '0';
+  const bio = state.bioText.value.trim();
 
-  $('teamBadge').textContent = initials(team);
-  $('teamBadgeSmall').textContent = initials(team);
-  $('opponentBadge').textContent = initials(opponent);
-  $('teamNameFront').textContent = team.toUpperCase();
-  $('teamNameMatchup').textContent = team.toUpperCase();
-  $('opponentNameEl').textContent = opponent.toUpperCase();
-  $('homeScoreEl').textContent = state.homeScore.value || '0';
-  $('awayScoreEl').textContent = state.awayScore.value || '0';
-  $('headlineNumberEl').textContent = hn;
-  $('headlineLabelEl').textContent = hl;
-  $('gameMetaEl').textContent = meta.toUpperCase();
-  $('quoteTextEl').textContent = quote ? `"${quote}"` : '';
-  $('quoteBlock').classList.toggle('hidden', !quote);
-  $('quoteSig').textContent = `— ${name.toUpperCase()} #${num}`;
-  $('achCaptionEl').textContent = achC.toUpperCase();
-  $('achSubEl').textContent = achS.toUpperCase();
+  $('playerNameFront').textContent = name.toUpperCase();
+  $('teamBadgeFront').textContent = initials(team);
+  $('teamBadgeBack').textContent = initials(team);
+  $('teamNameBack').textContent = team.toUpperCase();
 
-  $('ghostNumber').textContent = num;
-  $('posBadge').textContent = pos.toUpperCase();
-  $('teamNameBack').textContent = team;
-  $('playerNameBack').textContent = name.toUpperCase();
-  $('numberBack').textContent = '#' + num;
+  $('cardBrandEl').textContent = state.cardBrand.value.trim().toUpperCase() || 'FANTASY NOW';
+  $('serialNumberEl').textContent = state.serialNumber.value.trim() || '1/1';
+  $('headlineLabelEl').textContent = state.headlineLabel.value.trim() || 'HIGHLIGHT';
+  $('headlineNumberEl').textContent = state.headlineNumber.value.trim() || num;
+  $('quoteTextEl').textContent = state.quoteText.value.trim() || 'Straight Buckets';
+  $('achCaptionEl').textContent = state.achCaption.value.trim().toUpperCase();
+  $('achSubEl').textContent = state.achSub.value.trim().toUpperCase();
+
+  $('bioTextEl').textContent = bio;
+  $('matchupLine').textContent = `${meta.toUpperCase()} · W ${hs}–${as} VS ${opponent.toUpperCase()}`;
+  $('footerSerial').textContent = `№ ${state.serialNumber.value.trim() || '1/1'}`;
 
   document.documentElement.style.setProperty('--ink', state.teamColor.value);
   const inkRgb = hexToRgb(state.teamColor.value);
@@ -547,13 +549,16 @@ function syncText(){
 }
 
 function syncStats(){
+  $('tcG').textContent = state.statG.value;
+  $('tcPPG').textContent = state.statPPG.value;
+  $('tcEFF').textContent = state.statEFF.value;
+  $('heroPPG').textContent = state.statPPG.value;
+  $('heroEFF').textContent = state.statEFF.value;
   $('rowG').textContent = state.statG.value;
-  $('rowPPG').textContent = state.statPPG.value;
   $('rowRPG').textContent = state.statRPG.value;
   $('rowAPG').textContent = state.statAPG.value;
   $('rowSPG').textContent = state.statSPG.value;
   $('rowBPG').textContent = state.statBPG.value;
-  $('rowEFF').textContent = state.statEFF.value;
 }
 
 function syncPhotoTransform(){
@@ -581,8 +586,8 @@ function syncStatsVisibility(){
 }
 
 [state.playerName, state.playerNumber, state.playerPosition, state.teamName, state.teamColor, state.accentColor,
- state.headlineNumber, state.headlineLabel, state.gameMeta, state.opponentTeam, state.homeScore, state.awayScore,
- state.quoteText, state.achCaption, state.achSub]
+ state.cardBrand, state.serialNumber, state.headlineNumber, state.headlineLabel, state.quoteText,
+ state.achCaption, state.achSub, state.gameMeta, state.opponentTeam, state.homeScore, state.awayScore, state.bioText]
   .forEach(el => el.addEventListener('input', syncText));
 
 [state.statG, state.statPPG, state.statRPG, state.statAPG, state.statSPG, state.statBPG, state.statEFF]
@@ -654,7 +659,7 @@ $('downloadBtn').addEventListener('click', async () => {
     });
     const link = document.createElement('a');
     const name = (state.playerName.value.trim() || 'player').replace(/\s+/g,'-').toLowerCase();
-    link.download = `${name}-wallpaper-${isFlipped ? 'back' : 'front'}.png`;
+    link.download = `${name}-card-${isFlipped ? 'back' : 'front'}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   } catch(err){

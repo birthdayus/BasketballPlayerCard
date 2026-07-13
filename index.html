@@ -59,10 +59,10 @@
     background:#F3EEE4;
     transform: rotateY(0deg);
   }
-  .poster-photo-zone{ position:relative; flex:0 0 54%; overflow:hidden; background:#1b1f29; }
+  .poster-photo-zone{ position:relative; flex:0 0 42%; overflow:hidden; background:#1b1f29; }
   .poster-photo-scrim{
     position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,0) 38%, rgba(0,0,0,.5) 76%, rgba(0,0,0,.88) 100%);
+    background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.5) 74%, rgba(0,0,0,.88) 100%);
   }
   .poster-topbar{ position:absolute; top:14px; left:14px; right:14px; display:flex; align-items:center; gap:8px; z-index:2; }
   .team-badge{
@@ -73,38 +73,38 @@
   .team-badge.alt{ background:var(--accent); color:#1a1305; }
   .poster-topbar-team{ font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#fff; opacity:.92; font-weight:700; }
 
-  .poster-headline{ position:absolute; left:14px; right:14px; bottom:12px; z-index:2; }
-  .headline-number{ font-size:64px; line-height:.82; color:var(--ink); text-shadow:0 2px 12px rgba(0,0,0,.5); }
-  .headline-label{ font-size:24px; color:var(--accent); margin-top:-4px; text-shadow:0 2px 6px rgba(0,0,0,.55); }
+  .poster-headline{ position:absolute; left:14px; right:14px; bottom:10px; z-index:2; }
+  .headline-number{ font-size:56px; line-height:.82; color:var(--ink); text-shadow:0 2px 12px rgba(0,0,0,.5); }
+  .headline-label{ font-size:21px; color:var(--accent); margin-top:-3px; text-shadow:0 2px 6px rgba(0,0,0,.55); }
 
   .poster-info-zone{ position:relative; flex:1; overflow:hidden; }
   .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.055; mix-blend-mode:multiply; pointer-events:none; }
   .paper-blob{ position:absolute; border-radius:50%; filter:blur(45px); pointer-events:none; }
   .paper-blob-a{ width:60%; aspect-ratio:1; top:-16%; right:-20%; background:rgba(var(--ink-rgb),.22); }
   .paper-blob-b{ width:55%; aspect-ratio:1; bottom:-18%; left:-18%; background:rgba(var(--accent-rgb),.20); }
-  .poster-info-inner{ position:relative; z-index:2; height:100%; padding:12px 16px 14px; display:flex; flex-direction:column; gap:7px; }
+  .poster-info-inner{ position:relative; z-index:2; height:100%; padding:10px 16px 9px; display:flex; flex-direction:column; gap:5px; }
 
-  .poster-meta{ font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:#5b5346; font-weight:700; }
+  .poster-meta{ font-size:8.5px; letter-spacing:.09em; text-transform:uppercase; color:#5b5346; font-weight:700; }
 
-  .poster-matchup{ display:flex; align-items:center; justify-content:space-between; padding:7px 0; border-top:1px solid rgba(0,0,0,.12); border-bottom:1px solid rgba(0,0,0,.12); }
-  .matchup-team{ display:flex; align-items:center; gap:5px; font-size:9px; font-weight:700; text-transform:uppercase; color:#2a251c; }
-  .matchup-score{ font-family:'Anton'; font-size:17px; color:var(--ink); margin-left:2px; }
-  .matchup-vs{ font-size:8px; color:#8a8272; font-weight:800; }
+  .poster-matchup{ display:flex; align-items:center; justify-content:space-between; padding:5px 0; border-top:1px solid rgba(0,0,0,.12); border-bottom:1px solid rgba(0,0,0,.12); }
+  .matchup-team{ display:flex; align-items:center; gap:4px; font-size:8px; font-weight:700; text-transform:uppercase; color:#2a251c; }
+  .matchup-score{ font-family:'Anton'; font-size:15px; color:var(--ink); margin-left:1px; }
+  .matchup-vs{ font-size:7px; color:#8a8272; font-weight:800; }
 
-  .poster-stats{ display:flex; flex-direction:column; }
-  .stat-row{ display:flex; align-items:baseline; gap:10px; padding:3.5px 0; border-bottom:1px solid rgba(0,0,0,.08); }
-  .stat-num{ font-size:18px; color:#231f18; min-width:44px; }
-  .stat-label{ font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; }
+  .poster-stats{ display:grid; grid-template-columns:1fr 1fr; column-gap:14px; }
+  .stat-row{ display:flex; align-items:baseline; gap:6px; padding:2.5px 0; border-bottom:1px solid rgba(0,0,0,.08); }
+  .stat-num{ font-size:14px; color:#231f18; min-width:34px; }
+  .stat-label{ font-size:7px; letter-spacing:.06em; text-transform:uppercase; color:#847c6c; font-weight:700; }
 
-  .poster-quote{ margin-top:2px; padding-left:9px; border-left:3px solid var(--ink); }
-  .poster-quote p{ font-size:10px; font-style:italic; color:#2a251c; line-height:1.35; }
-  .quote-sig{ display:block; font-size:8px; margin-top:3px; color:#847c6c; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+  .poster-quote{ margin-top:1px; padding-left:8px; border-left:3px solid var(--ink); }
+  .poster-quote p{ font-size:8.5px; font-style:italic; color:#2a251c; line-height:1.3; }
+  .quote-sig{ display:block; font-size:7px; margin-top:2px; color:#847c6c; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
 
-  .poster-achievement{ margin-top:auto; text-align:center; padding-top:8px; border-top:2px solid var(--ink); }
-  .ach-caption{ font-family:'Anton'; font-size:16px; color:var(--ink); }
-  .ach-sub{ font-size:7.5px; letter-spacing:.12em; text-transform:uppercase; color:#847c6c; font-weight:700; margin-top:1px; }
+  .poster-achievement{ margin-top:auto; text-align:center; padding-top:6px; border-top:2px solid var(--ink); }
+  .ach-caption{ font-family:'Anton'; font-size:14px; color:var(--ink); }
+  .ach-sub{ font-size:6.5px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; margin-top:1px; }
 
-  .poster-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+  .poster-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:1px solid rgba(0,0,0,.08); }
 
   /* ================= BACK — clean full-bleed wallpaper ================= */
   .card-back{ transform: rotateY(180deg); background:linear-gradient(165deg,#12151d,#0B0E14); }
@@ -129,7 +129,7 @@
   }
   .card-border-frame{
     position:absolute; inset:0; border-radius:22px; pointer-events:none;
-    box-shadow: inset 0 0 0 2px rgba(255,255,255,.35), inset 0 0 0 6px rgba(0,0,0,.25);
+    border:2px solid rgba(255,255,255,.32);
   }
 
   /* ---- anime mode filter (clearly visible, html2canvas-safe) ---- */
@@ -153,9 +153,9 @@
       repeating-linear-gradient(-70deg, rgba(255,255,255,.14) 0 1.5px, transparent 1.5px 20px);
     mix-blend-mode: screen; opacity:.4;
   }
-  .card-front.anime-mode .poster-photo-zone{ box-shadow: inset 0 0 0 4px var(--accent); }
+  .card-front.anime-mode .poster-photo-zone{ box-sizing:border-box; border:4px solid var(--accent); }
   .card-front.anime-mode .headline-number{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.6); }
-  .card-back.anime-mode .card-border-frame{ box-shadow: inset 0 0 0 3px var(--accent), 0 0 18px 2px var(--accent); }
+  .card-back.anime-mode .card-border-frame{ border:3px solid var(--accent); }
   .card-back.anime-mode #playerNameBack,
   .card-back.anime-mode #numberBack{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.5); }
 
@@ -628,6 +628,8 @@ $('downloadBtn').addEventListener('click', async () => {
   clone.style.webkitBackfaceVisibility = 'visible';
   clone.style.top = '0';
   clone.style.left = '0';
+  clone.style.boxShadow = 'none';
+  clone.style.borderRadius = '0';
 
   const wrapper = document.createElement('div');
   wrapper.style.position = 'fixed';

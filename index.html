@@ -59,9 +59,8 @@
   .photo-wrap{ position:absolute; inset:0; overflow:hidden; background:#1b1f29; }
   .photo-wrap img{
     position:absolute; top:50%; left:50%;
-    min-width:100%; min-height:100%;
-    transform: translate(-50%,-50%) translate(var(--px,0px), var(--py,0px)) scale(var(--pscale,1));
-    object-fit:cover;
+    max-width:none;
+    transform: translate(-50%,-50%) translate(var(--px,0px), var(--py,0px)) scale(calc(var(--cover-scale, 1) * var(--pscale, 1)));
     transition: filter .4s ease;
   }
   .photo-placeholder{
@@ -88,9 +87,11 @@
   .fpt-label{ font-size:6.5px; letter-spacing:.08em; text-transform:uppercase; color:#6b6559; font-weight:800; }
   .fpt-value{ font-family:'Anton'; font-size:16px; color:#1a1a1a; }
 
-  .front-signature{ position:absolute; top:52%; left:16px; right:60px; color:var(--ink); font-size:30px; line-height:1; transform:rotate(-3deg); transform-origin:left center; text-shadow:0 1px 3px rgba(255,255,255,.35); }
-  .front-certified{ position:absolute; top:calc(52% + 34px); left:20px; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.5); }
-  .front-autograph{ position:absolute; top:calc(52% + 50px); left:24px; color:#fff; font-size:26px; line-height:1; transform:rotate(-2deg); transform-origin:left center; text-shadow:0 1px 4px rgba(0,0,0,.6); }
+  .front-signature{ position:absolute; top:50%; left:16px; right:20px; color:var(--ink); font-size:38px; line-height:1; transform:rotate(-3deg); transform-origin:left center; text-shadow:0 1px 3px rgba(255,255,255,.35); }
+  .front-certified{ position:absolute; top:calc(50% + 42px); left:20px; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.5); }
+  .front-autograph{ position:absolute; top:calc(50% + 62px); left:20px; right:20px; transform:rotate(-2deg); transform-origin:left center; }
+  .front-autograph-text{ font-family:'Permanent Marker',cursive; color:#fff; font-size:46px; line-height:1; text-shadow:0 1px 4px rgba(0,0,0,.6); }
+  .front-autograph-img{ display:block; width:260px; max-width:100%; height:auto; }
 
   .front-banner{ position:absolute; left:0; right:0; bottom:66px; background:var(--ink); color:#fff; padding:6px 16px; }
   .banner-caption{ font-family:'Anton'; font-size:14px; line-height:1.1; }
@@ -130,8 +131,9 @@
   .bio-eyebrow{ font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); font-weight:800; margin-bottom:4px; }
   .bio-text{ font-size:10.5px; line-height:1.4; color:#2a251c; }
 
-  .back-highlight-zone{ position:relative; padding:8px 0; min-height:150px; }
-  .back-photo-panel{ position:absolute; top:-8%; right:-6%; width:48%; height:116%; border-radius:14px; overflow:hidden; border:3px solid var(--ink); background:#1b1f29; }
+  .back-highlight-zone{ position:relative; padding:8px 0; min-height:168px; overflow:hidden; }
+  .back-diagonal-accent{ position:absolute; top:-15%; left:-12%; width:65%; height:130%; background:var(--ink); opacity:.09; transform:rotate(14deg); }
+  .back-photo-panel{ position:absolute; top:4px; right:0; bottom:4px; width:40%; border-radius:12px; overflow:hidden; border:3px solid var(--ink); background:#1b1f29; }
   .back-photo-panel img{ width:100%; height:100%; object-fit:cover; }
   .back-stat-hero-row{ position:relative; display:flex; align-items:center; gap:12px; padding:7px 0; max-width:56%; }
   .back-stat-hero-num{ font-family:'Anton'; font-size:42px; color:var(--ink); min-width:72px; line-height:1; }
@@ -183,6 +185,10 @@
   .field-label{ font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#8B93A7; }
   .field-input{ background:#0d1017; border:1px solid #262c39; color:#F5F3EE; }
   .field-input:focus{ outline:none; border-color:#FF6B35; box-shadow:0 0 0 3px rgba(255,107,53,.15); }
+
+  .signature-pad-wrap{ position:relative; background:#fff; border-radius:8px; overflow:hidden; touch-action:none; }
+  #signaturePad{ display:block; width:100%; height:120px; cursor:crosshair; }
+  .signature-placeholder-hint{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.8rem; color:#b7bcc7; pointer-events:none; }
 
   @media (prefers-reduced-motion: reduce){ .card-flipper{ transition:none; } }
 </style>
@@ -246,7 +252,7 @@
       </label>
       <div class="space-y-2">
         <div class="flex justify-between field-label"><span>縮放</span><span id="scaleVal">100%</span></div>
-        <input id="photoScale" type="range" min="100" max="220" value="100" class="w-full">
+        <input id="photoScale" type="range" min="40" max="220" value="100" class="w-full">
         <div class="grid grid-cols-2 gap-3">
           <div>
             <div class="flex justify-between field-label"><span>X 位移</span><span id="offsetXVal">0</span></div>
@@ -306,6 +312,17 @@
           <span class="field-label">成就橫額副標</span>
           <input id="achSub" type="text" value="Custom Fantasy Highlight Card" maxlength="34" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
+      </div>
+
+      <div class="pt-1">
+        <span class="field-label">親筆簽名（用手指/滑鼠寫低）</span>
+        <div class="signature-pad-wrap mt-1">
+          <span class="signature-placeholder-hint" id="sigHint">喺呢度簽名</span>
+          <canvas id="signaturePad" width="300" height="120"></canvas>
+        </div>
+        <button id="clearSignatureBtn" class="w-full mt-2 flex items-center justify-center gap-2 rounded-lg py-2 text-xs font-semibold bg-white/5 border border-white/10 hover:bg-white/10 transition">
+          <i data-lucide="eraser" class="w-3.5 h-3.5"></i> 清除簽名（改用預設題字）
+        </button>
       </div>
     </section>
 
@@ -425,7 +442,10 @@
 
             <div class="front-signature font-script" id="quoteTextEl">Straight Buckets</div>
             <p class="front-certified">Fantasy Certified Autograph</p>
-            <div class="front-autograph font-script" id="autographNameEl">Elmo</div>
+            <div class="front-autograph">
+              <span class="front-autograph-text" id="autographNameEl">Elmo</span>
+              <img class="front-autograph-img hidden" id="autographImgEl" src="" alt="">
+            </div>
 
             <div class="front-banner">
               <p class="banner-caption" id="achCaptionEl">FAN FAVORITE</p>
@@ -467,6 +487,7 @@
 
               <div id="posterStatsSection">
                 <div class="back-highlight-zone">
+                  <div class="back-diagonal-accent"></div>
                   <div class="back-photo-panel">
                     <div class="photo-placeholder"><i data-lucide="image" class="w-8 h-8"></i></div>
                     <img class="cardPhoto hidden" src="" alt="">
@@ -622,6 +643,69 @@ function syncStatsVisibility(){
   $('posterStatsSection').classList.toggle('hidden', !on);
 }
 
+// ---- signature pad: draw with mouse/touch/pen, paste onto the front card like an e-signature ----
+const sigCanvas = $('signaturePad');
+const sigCtx = sigCanvas.getContext('2d');
+const sigHint = $('sigHint');
+const autographNameEl = $('autographNameEl');
+const autographImgEl = $('autographImgEl');
+let hasSignature = false;
+let isDrawing = false;
+let lastPoint = null;
+
+sigCtx.lineWidth = 3;
+sigCtx.lineCap = 'round';
+sigCtx.lineJoin = 'round';
+sigCtx.strokeStyle = '#141414';
+
+function sigPointFromEvent(e){
+  const rect = sigCanvas.getBoundingClientRect();
+  const scaleX = sigCanvas.width / rect.width;
+  const scaleY = sigCanvas.height / rect.height;
+  return { x: (e.clientX - rect.left) * scaleX, y: (e.clientY - rect.top) * scaleY };
+}
+
+function updateAutographFromCanvas(){
+  autographImgEl.src = sigCanvas.toDataURL('image/png');
+  autographImgEl.classList.remove('hidden');
+  autographNameEl.classList.add('hidden');
+}
+
+sigCanvas.addEventListener('pointerdown', (e) => {
+  isDrawing = true;
+  hasSignature = true;
+  sigHint.classList.add('hidden');
+  sigCanvas.setPointerCapture(e.pointerId);
+  lastPoint = sigPointFromEvent(e);
+});
+
+sigCanvas.addEventListener('pointermove', (e) => {
+  if(!isDrawing) return;
+  const p = sigPointFromEvent(e);
+  sigCtx.beginPath();
+  sigCtx.moveTo(lastPoint.x, lastPoint.y);
+  sigCtx.lineTo(p.x, p.y);
+  sigCtx.stroke();
+  lastPoint = p;
+});
+
+function endSigStroke(){
+  if(!isDrawing) return;
+  isDrawing = false;
+  if(hasSignature) updateAutographFromCanvas();
+}
+sigCanvas.addEventListener('pointerup', endSigStroke);
+sigCanvas.addEventListener('pointerleave', endSigStroke);
+sigCanvas.addEventListener('pointercancel', endSigStroke);
+
+$('clearSignatureBtn').addEventListener('click', () => {
+  sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+  hasSignature = false;
+  sigHint.classList.remove('hidden');
+  autographImgEl.classList.add('hidden');
+  autographNameEl.classList.remove('hidden');
+});
+
 [state.playerName, state.playerNumber, state.playerPosition, state.teamName, state.teamColor, state.accentColor,
  state.cardBrand, state.serialNumber, state.headlineNumber, state.headlineLabel, state.quoteText,
  state.achCaption, state.achSub, state.gameMeta, state.opponentTeam, state.homeScore, state.awayScore, state.bioText]
@@ -650,6 +734,23 @@ $('photoUpload').addEventListener('change', (e) => {
   };
   reader.readAsDataURL(file);
 });
+
+// ---- keep the front hero photo distortion-free: compute the exact "just covers" base scale
+// from the image's real dimensions, then let the zoom slider multiply on top of that baseline
+// (instead of relying on object-fit:cover, which can only crop tighter, never zoom back out).
+function updateHeroPhotoCoverScale(){
+  const wrap = $('photoWrapFront');
+  const img = wrap.querySelector('img.cardPhoto');
+  if(!img || !img.naturalWidth) return;
+  const cw = wrap.clientWidth, ch = wrap.clientHeight;
+  const s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+  img.style.width = img.naturalWidth + 'px';
+  img.style.height = img.naturalHeight + 'px';
+  img.style.setProperty('--cover-scale', s);
+}
+const heroPhotoImg = $('photoWrapFront').querySelector('img.cardPhoto');
+heroPhotoImg.addEventListener('load', updateHeroPhotoCoverScale);
+window.addEventListener('resize', updateHeroPhotoCoverScale);
 
 $('flipBtn').addEventListener('click', () => {
   cardFlipper.classList.toggle('is-flipped');

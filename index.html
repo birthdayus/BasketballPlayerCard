@@ -54,11 +54,11 @@
   }
 
   /* ================= FRONT — headline poster, shared background, side-by-side ================= */
-  .card-front{ position:relative; background:#F3EEE4; transform: rotateY(0deg); }
+  .card-front{ background:#F3EEE4; transform: rotateY(0deg); }
   .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.05; mix-blend-mode:multiply; pointer-events:none; z-index:1; }
-  .paper-blob{ position:absolute; border-radius:50%; filter:blur(50px); pointer-events:none; z-index:0; }
-  .paper-blob-a{ width:55%; aspect-ratio:1; top:-12%; left:-16%; background:rgba(var(--ink-rgb),.22); }
-  .paper-blob-b{ width:50%; aspect-ratio:1; bottom:-10%; left:6%; background:rgba(var(--accent-rgb),.18); }
+  .paper-blob{ position:absolute; border-radius:50%; pointer-events:none; z-index:0; }
+  .paper-blob-a{ width:75%; aspect-ratio:1; top:-20%; left:-24%; background:radial-gradient(circle, rgba(var(--ink-rgb),.32) 0%, rgba(var(--ink-rgb),0) 68%); }
+  .paper-blob-b{ width:70%; aspect-ratio:1; bottom:-16%; left:0%; background:radial-gradient(circle, rgba(var(--accent-rgb),.26) 0%, rgba(var(--accent-rgb),0) 68%); }
 
   .front-photo-zone{ position:absolute; top:0; right:0; bottom:0; width:54%; overflow:hidden; background:#1b1f29; z-index:1; }
   .photo-fade-edge{
@@ -108,8 +108,20 @@
 
   .poster-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:1px solid rgba(0,0,0,.08); z-index:3; }
 
-  /* ================= BACK — just the uploaded photo, full bleed ================= */
+  /* ================= BACK — full photo with player info overlay ================= */
   .card-back{ transform: rotateY(180deg); background:#1b1f29; }
+  .back-scrim{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.08) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.9) 100%); }
+  .ghost-number{
+    position:absolute; right:-.03em; bottom:-.05em; line-height:.8;
+    font-size:150px; color: rgba(255,255,255,.14);
+    -webkit-text-stroke: 1.5px rgba(255,255,255,.25);
+    pointer-events:none;
+  }
+  .back-pos-badge{ position:absolute; top:16px; left:16px; padding:5px 10px; border-radius:8px; font-size:11px; font-weight:800; letter-spacing:.05em; background:var(--ink); color:#fff; }
+  .back-league{ position:absolute; top:16px; right:16px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.7); }
+  .back-info{ position:absolute; left:16px; right:16px; bottom:20px; }
+  .back-team{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:2px; }
+  .card-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:2px solid rgba(255,255,255,.32); }
 
   .photo-wrap{ position:absolute; inset:0; overflow:hidden; background:#1b1f29; }
   .photo-wrap img{
@@ -148,7 +160,9 @@
   }
   .card-front.anime-mode .front-photo-zone{ box-sizing:border-box; border-left:4px solid var(--accent); }
   .card-front.anime-mode .headline-number{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.6); }
-  .card-back.anime-mode{ border:6px solid var(--accent); box-sizing:border-box; }
+  .card-back.anime-mode .card-border-frame{ border:4px solid var(--accent); }
+  .card-back.anime-mode #playerNameBack,
+  .card-back.anime-mode #numberBack{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.5); }
 
   ::-webkit-scrollbar{ width:8px; }
   ::-webkit-scrollbar-thumb{ background:#2a2f3c; border-radius:8px; }
@@ -426,7 +440,7 @@
           <div class="poster-border-frame"></div>
         </div>
 
-        <!-- BACK FACE — just the uploaded photo, full bleed -->
+        <!-- BACK FACE — full photo with player info overlay -->
         <div id="cardBack" class="card-face card-back">
           <div class="photo-wrap" id="photoWrapBack">
             <div class="photo-placeholder"><i data-lucide="image" class="w-14 h-14"></i></div>
@@ -437,6 +451,18 @@
             <div class="anime-speedlines"></div>
             <div class="anime-halftone"></div>
           </div>
+          <div class="back-scrim"></div>
+          <span class="ghost-number font-display" id="ghostNumber">36</span>
+          <div class="back-pos-badge" id="posBadge">G/F</div>
+          <div class="back-league">FANTASY EDITION</div>
+          <div class="back-info">
+            <p class="back-team font-mono-stat" id="teamNameBack" style="color:var(--accent);">Sesame All-Stars</p>
+            <div class="flex items-end justify-between">
+              <h2 class="font-display text-3xl leading-none text-white" id="playerNameBack">ELMO</h2>
+              <span class="font-display text-4xl leading-none opacity-90 text-white" id="numberBack">#36</span>
+            </div>
+          </div>
+          <div class="card-border-frame"></div>
         </div>
 
       </div>
@@ -479,6 +505,7 @@ function initials(name){
 function syncText(){
   const name = state.playerName.value.trim() || 'PLAYER';
   const num = state.playerNumber.value.trim() || '0';
+  const pos = state.playerPosition.value.trim() || '—';
   const team = state.teamName.value.trim() || 'FREE AGENTS';
   const opponent = state.opponentTeam.value.trim() || 'OPPONENT';
   const hn = state.headlineNumber.value.trim() || '0';
@@ -504,6 +531,12 @@ function syncText(){
   $('quoteSig').textContent = `— ${name.toUpperCase()} #${num}`;
   $('achCaptionEl').textContent = achC.toUpperCase();
   $('achSubEl').textContent = achS.toUpperCase();
+
+  $('ghostNumber').textContent = num;
+  $('posBadge').textContent = pos.toUpperCase();
+  $('teamNameBack').textContent = team;
+  $('playerNameBack').textContent = name.toUpperCase();
+  $('numberBack').textContent = '#' + num;
 
   document.documentElement.style.setProperty('--ink', state.teamColor.value);
   const inkRgb = hexToRgb(state.teamColor.value);

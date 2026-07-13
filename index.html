@@ -69,9 +69,9 @@
     background: linear-gradient(160deg,#1b2030,#0d1017);
     color:#3a4257;
   }
-  .front-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,.42) 66%, rgba(0,0,0,.88) 100%); }
+  .front-scrim{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,.42) 66%, rgba(0,0,0,.88) 100%); }
 
-  .front-chrome{ position:absolute; inset:0; z-index:2; pointer-events:none; }
+  .front-chrome{ position:absolute; inset:0; pointer-events:none; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 
   .ticket-block{ position:absolute; top:14px; left:14px; width:66%; border-radius:8px; overflow:hidden; background:rgba(255,255,255,.96); }
   .ticket-brandrow{ display:flex; align-items:center; justify-content:space-between; background:var(--ink); color:#fff; padding:5px 9px; }
@@ -84,14 +84,20 @@
   .tc-label{ font-size:6.5px; letter-spacing:.06em; text-transform:uppercase; color:#6b6559; font-weight:800; }
   .tc-value{ font-family:'Anton'; font-size:15px; color:#1a1a1a; }
 
-  .front-signature{ position:absolute; top:56%; left:16px; right:60px; color:var(--ink); font-size:30px; line-height:1; transform:rotate(-3deg); transform-origin:left center; text-shadow:0 1px 3px rgba(255,255,255,.35); }
+  .front-position-tag{ position:absolute; top:14px; right:14px; background:rgba(255,255,255,.96); border-radius:8px; padding:7px 12px; text-align:center; }
+  .fpt-label{ font-size:6.5px; letter-spacing:.08em; text-transform:uppercase; color:#6b6559; font-weight:800; }
+  .fpt-value{ font-family:'Anton'; font-size:16px; color:#1a1a1a; }
 
-  .front-banner{ position:absolute; left:0; right:0; bottom:52px; background:var(--ink); color:#fff; padding:6px 16px; }
+  .front-signature{ position:absolute; top:52%; left:16px; right:60px; color:var(--ink); font-size:30px; line-height:1; transform:rotate(-3deg); transform-origin:left center; text-shadow:0 1px 3px rgba(255,255,255,.35); }
+  .front-certified{ position:absolute; top:calc(52% + 34px); left:20px; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.5); }
+
+  .front-banner{ position:absolute; left:0; right:0; bottom:66px; background:var(--ink); color:#fff; padding:6px 16px; }
   .banner-caption{ font-family:'Anton'; font-size:14px; line-height:1.1; }
   .banner-sub{ font-size:8px; letter-spacing:.08em; text-transform:uppercase; opacity:.85; margin-top:1px; }
 
-  .front-nameplate{ position:absolute; left:0; right:0; bottom:10px; height:42px; background:#141414; display:flex; align-items:center; padding:0 16px; }
-  .nameplate-name{ font-family:'Anton'; font-size:22px; color:#fff; letter-spacing:.01em; }
+  .front-nameplate{ position:absolute; left:0; right:0; bottom:10px; height:56px; background:#141414; display:flex; flex-direction:column; justify-content:center; padding:0 16px; }
+  .nameplate-name{ font-family:'Anton'; font-size:22px; color:#fff; letter-spacing:.01em; line-height:1; }
+  .nameplate-team{ font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-top:2px; }
 
   .front-crest{
     position:absolute; bottom:8px; right:10px; width:36px; height:36px;
@@ -106,44 +112,50 @@
 
   /* ================= BACK — bio + big-number comparison, Upper-Deck style ================= */
   .card-back-inner{ position:relative; height:100%; background:#F3EEE4; }
-  .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.05; mix-blend-mode:multiply; pointer-events:none; z-index:0; }
+  .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.05; mix-blend-mode:multiply; pointer-events:none; }
 
-  .back-content{ position:relative; z-index:1; height:100%; padding:16px 16px 12px; display:flex; flex-direction:column; gap:8px; }
+  .back-content{ position:relative; height:100%; padding:18px 16px 14px; display:flex; flex-direction:column; gap:11px; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 
   .back-topbar{ display:flex; align-items:center; gap:8px; }
-  .team-badge{ width:26px; height:26px; border-radius:50%; background:var(--ink); color:#fff; font-weight:800; font-size:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .back-topbar-team{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#2a251c; font-weight:800; }
+  .team-badge{ width:28px; height:28px; border-radius:50%; background:var(--ink); color:#fff; font-weight:800; font-size:11px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .back-topbar-team{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#2a251c; font-weight:800; }
 
-  .back-bio-box{ border:1px solid rgba(0,0,0,.16); border-radius:10px; padding:9px 11px; }
-  .bio-eyebrow{ font-size:8px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); font-weight:800; margin-bottom:3px; }
-  .bio-text{ font-size:9.5px; line-height:1.34; color:#2a251c; }
+  .back-quickfacts{ display:flex; gap:8px; }
+  .qf-chip{ flex:1; border:1px solid rgba(0,0,0,.14); border-radius:8px; padding:5px 6px; text-align:center; }
+  .qf-label{ font-size:6.5px; letter-spacing:.08em; text-transform:uppercase; color:#8a8272; font-weight:800; }
+  .qf-value{ font-family:'Anton'; font-size:14px; color:#231f18; }
 
-  .back-highlight-zone{ position:relative; padding:6px 0; }
-  .back-diagonal-accent{ position:absolute; top:-20%; right:-18%; width:75%; height:150%; background:var(--ink); opacity:.10; transform:rotate(16deg); z-index:0; border-radius:12px; }
-  .back-stat-hero-row{ position:relative; z-index:1; display:flex; align-items:center; gap:10px; padding:5px 0; }
-  .back-stat-hero-num{ font-family:'Anton'; font-size:38px; color:var(--ink); min-width:66px; line-height:1; }
-  .back-stat-hero-thumb{ width:36px; height:36px; border-radius:50%; overflow:hidden; border:2px solid var(--ink); flex-shrink:0; background:#1b1f29; }
+  .back-bio-box{ border:1px solid rgba(0,0,0,.16); border-radius:10px; padding:11px 13px; }
+  .bio-eyebrow{ font-size:8.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); font-weight:800; margin-bottom:4px; }
+  .bio-text{ font-size:10.5px; line-height:1.4; color:#2a251c; }
+
+  .back-highlight-zone{ position:relative; padding:8px 0; }
+  .back-diagonal-accent{ position:absolute; top:-20%; right:-18%; width:75%; height:150%; background:var(--ink); opacity:.10; transform:rotate(16deg); border-radius:12px; }
+  .back-stat-hero-row{ position:relative; display:flex; align-items:center; gap:12px; padding:7px 0; }
+  .back-stat-hero-num{ font-family:'Anton'; font-size:42px; color:var(--ink); min-width:72px; line-height:1; }
+  .back-stat-hero-thumb{ width:40px; height:40px; border-radius:50%; overflow:hidden; border:2px solid var(--ink); flex-shrink:0; background:#1b1f29; }
   .back-stat-hero-thumb img{ width:100%; height:100%; object-fit:cover; }
-  .back-stat-hero-label{ font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:#3a352b; line-height:1.2; }
-  .back-stat-hero-label small{ display:block; font-size:7px; font-weight:700; color:#8a8272; letter-spacing:.08em; }
+  .back-stat-hero-label{ font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:#3a352b; line-height:1.25; }
+  .back-stat-hero-label small{ display:block; font-size:7.5px; font-weight:700; color:#8a8272; letter-spacing:.08em; }
 
-  .back-matchup-line{ font-size:8px; letter-spacing:.06em; text-transform:uppercase; color:#5b5346; font-weight:700; }
+  .back-matchup-line{ font-size:8.5px; letter-spacing:.06em; text-transform:uppercase; color:#5b5346; font-weight:700; line-height:1.4; }
 
   .back-stats{ display:flex; flex-direction:column; }
-  .stat-row{ display:flex; align-items:baseline; gap:9px; padding:2.5px 0; border-bottom:1px solid rgba(0,0,0,.08); }
-  .stat-num{ font-size:15px; color:#231f18; min-width:34px; }
-  .stat-label{ font-size:7.5px; letter-spacing:.08em; text-transform:uppercase; color:#847c6c; font-weight:700; }
+  .stat-row{ display:flex; align-items:baseline; gap:10px; padding:4px 0; border-bottom:1px solid rgba(0,0,0,.08); }
+  .stat-num{ font-size:16px; color:#231f18; min-width:36px; }
+  .stat-label{ font-size:8px; letter-spacing:.08em; text-transform:uppercase; color:#847c6c; font-weight:700; }
 
-  .back-footer{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:7px; border-top:1px solid rgba(0,0,0,.12); }
-  .footer-brand{ font-size:7.5px; font-weight:800; letter-spacing:.07em; color:#5b5346; text-transform:uppercase; }
-  .footer-serial{ font-size:7.5px; font-weight:700; color:#5b5346; }
+  .back-footer{ margin-top:14px; display:flex; align-items:center; justify-content:space-between; padding-top:9px; border-top:1px solid rgba(0,0,0,.12); }
+  .footer-brand{ font-size:8px; font-weight:800; letter-spacing:.07em; color:#5b5346; text-transform:uppercase; }
+  .footer-serial{ font-size:8px; font-weight:700; color:#5b5346; }
+  .back-gold-strip{ margin-top:auto; height:10px; background:repeating-linear-gradient(115deg, var(--accent) 0 4px, rgba(0,0,0,.35) 4px 8px); }
 
-  .card-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:2px solid rgba(255,255,255,.32); z-index:3; }
+  .card-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:2px solid rgba(255,255,255,.32); }
 
   /* ---- anime mode filter (clearly visible, html2canvas-safe) ---- */
   .anime-mode .photo-wrap img{ filter: saturate(2.3) contrast(1.4) brightness(1.1); }
   .anime-mode .anime-overlay{ opacity:1; }
-  .anime-overlay{ position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .35s ease; z-index:1; }
+  .anime-overlay{ position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .35s ease; }
   .anime-wash{
     position:absolute; inset:0;
     background: linear-gradient(135deg, rgba(255,60,180,.4) 0%, transparent 45%, rgba(0,220,255,.4) 100%);
@@ -406,7 +418,13 @@
               </div>
             </div>
 
+            <div class="front-position-tag">
+              <p class="fpt-label">Pos</p>
+              <p class="fpt-value" id="posTagEl">G/F</p>
+            </div>
+
             <div class="front-signature font-script" id="quoteTextEl">Straight Buckets</div>
+            <p class="front-certified">Fantasy Certified Autograph</p>
 
             <div class="front-banner">
               <p class="banner-caption" id="achCaptionEl">FAN FAVORITE</p>
@@ -415,6 +433,7 @@
 
             <div class="front-nameplate">
               <span class="nameplate-name" id="playerNameFront">ELMO</span>
+              <span class="nameplate-team" id="teamNameFront">SESAME ALL-STARS</span>
             </div>
             <span class="front-corner-tag" id="headlineNumberEl">36</span>
             <div class="front-crest"><span id="teamBadgeFront">SA</span></div>
@@ -434,6 +453,12 @@
                 <span class="back-topbar-team" id="teamNameBack">SESAME ALL-STARS</span>
               </div>
 
+              <div class="back-quickfacts">
+                <div class="qf-chip"><p class="qf-label">Position</p><p class="qf-value" id="qfPosition">G/F</p></div>
+                <div class="qf-chip"><p class="qf-label">Number</p><p class="qf-value" id="qfNumber">#36</p></div>
+                <div class="qf-chip"><p class="qf-label">Games</p><p class="qf-value" id="qfGames">82</p></div>
+              </div>
+
               <div class="back-bio-box">
                 <p class="bio-eyebrow">Player Bio</p>
                 <p class="bio-text" id="bioTextEl">Elmo learned the crossover before the alphabet.</p>
@@ -448,6 +473,11 @@
                     <span class="back-stat-hero-label">Points Per Game<small>Season Average</small></span>
                   </div>
                   <div class="back-stat-hero-row">
+                    <span class="back-stat-hero-num font-display" id="heroRPG">6.8</span>
+                    <span class="back-stat-hero-thumb"><img class="cardPhoto hidden" src="" alt=""></span>
+                    <span class="back-stat-hero-label">Rebounds Per Game<small>Season Average</small></span>
+                  </div>
+                  <div class="back-stat-hero-row">
                     <span class="back-stat-hero-num font-display" id="heroEFF">28.9</span>
                     <span class="back-stat-hero-thumb"><img class="cardPhoto hidden" src="" alt=""></span>
                     <span class="back-stat-hero-label">Efficiency Rating<small>Advanced Metric</small></span>
@@ -458,7 +488,6 @@
 
                 <div class="back-stats">
                   <div class="stat-row"><span class="stat-num font-display" id="rowG">82</span><span class="stat-label">Games Played</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowRPG">6.8</span><span class="stat-label">Rebounds Per Game</span></div>
                   <div class="stat-row"><span class="stat-num font-display" id="rowAPG">5.2</span><span class="stat-label">Assists Per Game</span></div>
                   <div class="stat-row"><span class="stat-num font-display" id="rowSPG">1.5</span><span class="stat-label">Steals Per Game</span></div>
                   <div class="stat-row"><span class="stat-num font-display" id="rowBPG">0.7</span><span class="stat-label">Blocks Per Game</span></div>
@@ -469,6 +498,7 @@
                 <span class="footer-brand">Fantasy Card Co.</span>
                 <span class="footer-serial" id="footerSerial">№ 1/1</span>
               </div>
+              <div class="back-gold-strip"></div>
             </div>
           </div>
           <div class="card-border-frame"></div>
@@ -524,6 +554,8 @@ function syncText(){
   const bio = state.bioText.value.trim();
 
   $('playerNameFront').textContent = name.toUpperCase();
+  $('teamNameFront').textContent = team.toUpperCase();
+  $('posTagEl').textContent = state.playerPosition.value.trim().toUpperCase() || '—';
   $('teamBadgeFront').textContent = initials(team);
   $('teamBadgeBack').textContent = initials(team);
   $('teamNameBack').textContent = team.toUpperCase();
@@ -539,6 +571,8 @@ function syncText(){
   $('bioTextEl').textContent = bio;
   $('matchupLine').textContent = `${meta.toUpperCase()} · W ${hs}–${as} VS ${opponent.toUpperCase()}`;
   $('footerSerial').textContent = `№ ${state.serialNumber.value.trim() || '1/1'}`;
+  $('qfPosition').textContent = state.playerPosition.value.trim().toUpperCase() || '—';
+  $('qfNumber').textContent = '#' + num;
 
   document.documentElement.style.setProperty('--ink', state.teamColor.value);
   const inkRgb = hexToRgb(state.teamColor.value);
@@ -553,9 +587,10 @@ function syncStats(){
   $('tcPPG').textContent = state.statPPG.value;
   $('tcEFF').textContent = state.statEFF.value;
   $('heroPPG').textContent = state.statPPG.value;
+  $('heroRPG').textContent = state.statRPG.value;
   $('heroEFF').textContent = state.statEFF.value;
+  $('qfGames').textContent = state.statG.value;
   $('rowG').textContent = state.statG.value;
-  $('rowRPG').textContent = state.statRPG.value;
   $('rowAPG').textContent = state.statAPG.value;
   $('rowSPG').textContent = state.statSPG.value;
   $('rowBPG').textContent = state.statBPG.value;

@@ -53,61 +53,64 @@
     box-shadow: 0 25px 60px -15px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06);
   }
 
-  /* ================= FRONT — headline poster ================= */
-  .card-front{
-    display:flex; flex-direction:column;
-    background:#F3EEE4;
-    transform: rotateY(0deg);
-  }
-  .poster-photo-zone{ position:relative; flex:0 0 42%; overflow:hidden; background:#1b1f29; }
-  .poster-photo-scrim{
+  /* ================= FRONT — headline poster, shared background, side-by-side ================= */
+  .card-front{ position:relative; background:#F3EEE4; transform: rotateY(0deg); }
+  .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.05; mix-blend-mode:multiply; pointer-events:none; z-index:1; }
+  .paper-blob{ position:absolute; border-radius:50%; filter:blur(50px); pointer-events:none; z-index:0; }
+  .paper-blob-a{ width:55%; aspect-ratio:1; top:-12%; left:-16%; background:rgba(var(--ink-rgb),.22); }
+  .paper-blob-b{ width:50%; aspect-ratio:1; bottom:-10%; left:6%; background:rgba(var(--accent-rgb),.18); }
+
+  .front-photo-zone{ position:absolute; top:0; right:0; bottom:0; width:54%; overflow:hidden; background:#1b1f29; z-index:1; }
+  .photo-fade-edge{
     position:absolute; inset:0; pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.5) 74%, rgba(0,0,0,.88) 100%);
+    background:linear-gradient(90deg, #F3EEE4 0%, rgba(243,238,228,.9) 16%, rgba(243,238,228,.35) 34%, rgba(243,238,228,0) 56%);
   }
-  .poster-topbar{ position:absolute; top:14px; left:14px; right:14px; display:flex; align-items:center; gap:8px; z-index:2; }
+  .photo-bottom-vignette{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, transparent 62%, rgba(0,0,0,.35) 100%); }
+
+  .front-text-col{
+    position:relative; z-index:2; height:100%; width:62%;
+    padding:16px 10px 14px 16px;
+    display:flex; flex-direction:column; gap:9px;
+  }
+
+  .poster-topbar{ display:flex; align-items:center; gap:8px; }
   .team-badge{
     width:26px; height:26px; border-radius:50%; background:var(--ink); color:#fff;
     font-weight:800; font-size:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
-  .team-badge.sm{ width:18px; height:18px; font-size:8px; }
+  .team-badge.sm{ width:17px; height:17px; font-size:7.5px; }
   .team-badge.alt{ background:var(--accent); color:#1a1305; }
-  .poster-topbar-team{ font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#fff; opacity:.92; font-weight:700; }
+  .poster-topbar-team{ font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:#2a251c; opacity:.85; font-weight:800; }
 
-  .poster-headline{ position:absolute; left:14px; right:14px; bottom:10px; z-index:2; }
-  .headline-number{ font-size:56px; line-height:.82; color:var(--ink); text-shadow:0 2px 12px rgba(0,0,0,.5); }
-  .headline-label{ font-size:21px; color:var(--accent); margin-top:-3px; text-shadow:0 2px 6px rgba(0,0,0,.55); }
+  .poster-headline{ margin-top:2px; }
+  .headline-number{ font-size:74px; line-height:.8; color:var(--ink); }
+  .headline-label{ font-size:25px; color:var(--accent); margin-top:-6px; text-shadow:1px 1px 0 rgba(0,0,0,.06); }
 
-  .poster-info-zone{ position:relative; flex:1; overflow:hidden; }
-  .paper-grain{ position:absolute; inset:0; background-image:radial-gradient(rgba(0,0,0,.4) 1px, transparent 1.3px); background-size:4px 4px; opacity:.055; mix-blend-mode:multiply; pointer-events:none; }
-  .paper-blob{ position:absolute; border-radius:50%; filter:blur(45px); pointer-events:none; }
-  .paper-blob-a{ width:60%; aspect-ratio:1; top:-16%; right:-20%; background:rgba(var(--ink-rgb),.22); }
-  .paper-blob-b{ width:55%; aspect-ratio:1; bottom:-18%; left:-18%; background:rgba(var(--accent-rgb),.20); }
-  .poster-info-inner{ position:relative; z-index:2; height:100%; padding:10px 16px 9px; display:flex; flex-direction:column; gap:5px; }
+  .poster-meta{ font-size:9px; letter-spacing:.09em; text-transform:uppercase; color:#5b5346; font-weight:700; }
 
-  .poster-meta{ font-size:8.5px; letter-spacing:.09em; text-transform:uppercase; color:#5b5346; font-weight:700; }
-
-  .poster-matchup{ display:flex; align-items:center; justify-content:space-between; padding:5px 0; border-top:1px solid rgba(0,0,0,.12); border-bottom:1px solid rgba(0,0,0,.12); }
+  .poster-matchup{ display:flex; align-items:center; gap:6px; padding:6px 0; border-top:1px solid rgba(0,0,0,.12); border-bottom:1px solid rgba(0,0,0,.12); flex-wrap:wrap; }
   .matchup-team{ display:flex; align-items:center; gap:4px; font-size:8px; font-weight:700; text-transform:uppercase; color:#2a251c; }
   .matchup-score{ font-family:'Anton'; font-size:15px; color:var(--ink); margin-left:1px; }
   .matchup-vs{ font-size:7px; color:#8a8272; font-weight:800; }
 
-  .poster-stats{ display:grid; grid-template-columns:1fr 1fr; column-gap:14px; }
-  .stat-row{ display:flex; align-items:baseline; gap:6px; padding:2.5px 0; border-bottom:1px solid rgba(0,0,0,.08); }
-  .stat-num{ font-size:14px; color:#231f18; min-width:34px; }
-  .stat-label{ font-size:7px; letter-spacing:.06em; text-transform:uppercase; color:#847c6c; font-weight:700; }
+  .poster-stats{ display:flex; flex-direction:column; }
+  .stat-row{ display:flex; align-items:baseline; gap:9px; padding:3px 0; border-bottom:1px solid rgba(0,0,0,.08); }
+  .stat-num{ font-size:17px; color:#231f18; min-width:38px; }
+  .stat-label{ font-size:8.5px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; }
 
-  .poster-quote{ margin-top:1px; padding-left:8px; border-left:3px solid var(--ink); }
-  .poster-quote p{ font-size:8.5px; font-style:italic; color:#2a251c; line-height:1.3; }
-  .quote-sig{ display:block; font-size:7px; margin-top:2px; color:#847c6c; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+  .poster-quote{ padding-left:8px; border-left:3px solid var(--ink); }
+  .poster-quote p{ font-size:9.5px; font-style:italic; color:#2a251c; line-height:1.32; }
+  .quote-sig{ display:block; font-size:7.5px; margin-top:2px; color:#847c6c; font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
 
-  .poster-achievement{ margin-top:auto; text-align:center; padding-top:6px; border-top:2px solid var(--ink); }
-  .ach-caption{ font-family:'Anton'; font-size:14px; color:var(--ink); }
-  .ach-sub{ font-size:6.5px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; margin-top:1px; }
+  .poster-achievement{ margin-top:auto; padding-top:8px; border-top:2px solid var(--ink); }
+  .ach-caption{ font-family:'Anton'; font-size:15px; color:var(--ink); }
+  .ach-sub{ font-size:7px; letter-spacing:.1em; text-transform:uppercase; color:#847c6c; font-weight:700; margin-top:1px; }
 
-  .poster-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:1px solid rgba(0,0,0,.08); }
+  .poster-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:1px solid rgba(0,0,0,.08); z-index:3; }
 
-  /* ================= BACK — clean full-bleed wallpaper ================= */
-  .card-back{ transform: rotateY(180deg); background:linear-gradient(165deg,#12151d,#0B0E14); }
+  /* ================= BACK — just the uploaded photo, full bleed ================= */
+  .card-back{ transform: rotateY(180deg); background:#1b1f29; }
+
   .photo-wrap{ position:absolute; inset:0; overflow:hidden; background:#1b1f29; }
   .photo-wrap img{
     position:absolute; top:50%; left:50%;
@@ -120,16 +123,6 @@
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     background: linear-gradient(160deg,#1b2030,#0d1017);
     color:#3a4257;
-  }
-  .ghost-number{
-    position:absolute; right:-.03em; bottom:-.05em; line-height:.8;
-    font-size:150px; color: rgba(255,255,255,.14);
-    -webkit-text-stroke: 1.5px rgba(255,255,255,.25);
-    pointer-events:none;
-  }
-  .card-border-frame{
-    position:absolute; inset:0; border-radius:22px; pointer-events:none;
-    border:2px solid rgba(255,255,255,.32);
   }
 
   /* ---- anime mode filter (clearly visible, html2canvas-safe) ---- */
@@ -153,11 +146,9 @@
       repeating-linear-gradient(-70deg, rgba(255,255,255,.14) 0 1.5px, transparent 1.5px 20px);
     mix-blend-mode: screen; opacity:.4;
   }
-  .card-front.anime-mode .poster-photo-zone{ box-sizing:border-box; border:4px solid var(--accent); }
+  .card-front.anime-mode .front-photo-zone{ box-sizing:border-box; border-left:4px solid var(--accent); }
   .card-front.anime-mode .headline-number{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.6); }
-  .card-back.anime-mode .card-border-frame{ border:3px solid var(--accent); }
-  .card-back.anime-mode #playerNameBack,
-  .card-back.anime-mode #numberBack{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.5); }
+  .card-back.anime-mode{ border:6px solid var(--accent); box-sizing:border-box; }
 
   ::-webkit-scrollbar{ width:8px; }
   ::-webkit-scrollbar-thumb{ background:#2a2f3c; border-radius:8px; }
@@ -362,11 +353,15 @@
     <div id="cardStage" class="card-stage">
       <div id="cardFlipper" class="card-flipper">
 
-        <!-- FRONT FACE — headline poster -->
+        <!-- FRONT FACE — headline poster, left data / right bleeding photo, shared paper background -->
         <div id="cardFront" class="card-face card-front">
-          <div class="poster-photo-zone">
+          <div class="paper-grain"></div>
+          <div class="paper-blob paper-blob-a"></div>
+          <div class="paper-blob paper-blob-b"></div>
+
+          <div class="front-photo-zone">
             <div class="photo-wrap" id="photoWrapFront">
-              <div class="photo-placeholder"><i data-lucide="image" class="w-12 h-12"></i></div>
+              <div class="photo-placeholder"><i data-lucide="image" class="w-10 h-10"></i></div>
               <img class="cardPhoto hidden" src="" alt="">
             </div>
             <div class="anime-overlay">
@@ -374,66 +369,64 @@
               <div class="anime-speedlines"></div>
               <div class="anime-halftone"></div>
             </div>
-            <div class="poster-photo-scrim"></div>
+            <div class="photo-bottom-vignette"></div>
+            <div class="photo-fade-edge"></div>
+          </div>
+
+          <div class="front-text-col">
             <div class="poster-topbar">
               <span class="team-badge" id="teamBadge">SA</span>
               <span class="poster-topbar-team" id="teamNameFront">SESAME ALL-STARS</span>
             </div>
+
             <div class="poster-headline">
               <div class="headline-number font-display" id="headlineNumberEl">36</div>
               <div class="headline-label font-script" id="headlineLabelEl">Career High</div>
             </div>
-          </div>
 
-          <div class="poster-info-zone">
-            <div class="paper-grain"></div>
-            <div class="paper-blob paper-blob-a"></div>
-            <div class="paper-blob paper-blob-b"></div>
-            <div class="poster-info-inner">
-              <p class="poster-meta" id="gameMetaEl">SEASON OPENER · HOME COURT</p>
+            <p class="poster-meta" id="gameMetaEl">SEASON OPENER · HOME COURT</p>
 
-              <div id="posterStatsSection">
-                <div class="poster-matchup">
-                  <div class="matchup-team">
-                    <span class="team-badge sm" id="teamBadgeSmall">SA</span>
-                    <span id="teamNameMatchup">SESAME ALL-STARS</span>
-                    <span class="matchup-score" id="homeScoreEl">112</span>
-                  </div>
-                  <span class="matchup-vs">VS</span>
-                  <div class="matchup-team">
-                    <span class="matchup-score" id="awayScoreEl">104</span>
-                    <span id="opponentNameEl">RIVAL CITY HOOPERS</span>
-                    <span class="team-badge sm alt" id="opponentBadge">RC</span>
-                  </div>
+            <div id="posterStatsSection">
+              <div class="poster-matchup">
+                <div class="matchup-team">
+                  <span class="team-badge sm" id="teamBadgeSmall">SA</span>
+                  <span id="teamNameMatchup">SESAME</span>
+                  <span class="matchup-score" id="homeScoreEl">112</span>
                 </div>
-
-                <div class="poster-stats">
-                  <div class="stat-row"><span class="stat-num font-display" id="rowG">82</span><span class="stat-label">Games Played</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowPPG">25.4</span><span class="stat-label">Points Per Game</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowRPG">6.8</span><span class="stat-label">Rebounds Per Game</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowAPG">5.2</span><span class="stat-label">Assists Per Game</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowSPG">1.5</span><span class="stat-label">Steals Per Game</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowBPG">0.7</span><span class="stat-label">Blocks Per Game</span></div>
-                  <div class="stat-row"><span class="stat-num font-display" id="rowEFF">28.9</span><span class="stat-label">Efficiency Rating</span></div>
+                <span class="matchup-vs">VS</span>
+                <div class="matchup-team">
+                  <span class="matchup-score" id="awayScoreEl">104</span>
+                  <span id="opponentNameEl">RIVAL CITY</span>
+                  <span class="team-badge sm alt" id="opponentBadge">RC</span>
                 </div>
               </div>
 
-              <blockquote class="poster-quote" id="quoteBlock">
-                <p id="quoteTextEl">"I don't just play the game — I am the game."</p>
-                <span class="quote-sig" id="quoteSig">— ELMO #36</span>
-              </blockquote>
-
-              <div class="poster-achievement">
-                <p class="ach-caption" id="achCaptionEl">FAN FAVORITE</p>
-                <p class="ach-sub" id="achSubEl">CUSTOM FANTASY HIGHLIGHT CARD</p>
+              <div class="poster-stats">
+                <div class="stat-row"><span class="stat-num font-display" id="rowG">82</span><span class="stat-label">G</span></div>
+                <div class="stat-row"><span class="stat-num font-display" id="rowPPG">25.4</span><span class="stat-label">PPG</span></div>
+                <div class="stat-row"><span class="stat-num font-display" id="rowRPG">6.8</span><span class="stat-label">RPG</span></div>
+                <div class="stat-row"><span class="stat-num font-display" id="rowAPG">5.2</span><span class="stat-label">APG</span></div>
+                <div class="stat-row"><span class="stat-num font-display" id="rowSPG">1.5</span><span class="stat-label">SPG</span></div>
+                <div class="stat-row"><span class="stat-num font-display" id="rowBPG">0.7</span><span class="stat-label">BPG</span></div>
+                <div class="stat-row"><span class="stat-num font-display" id="rowEFF">28.9</span><span class="stat-label">EFF</span></div>
               </div>
+            </div>
+
+            <blockquote class="poster-quote" id="quoteBlock">
+              <p id="quoteTextEl">"I don't just play the game — I am the game."</p>
+              <span class="quote-sig" id="quoteSig">— ELMO #36</span>
+            </blockquote>
+
+            <div class="poster-achievement">
+              <p class="ach-caption" id="achCaptionEl">FAN FAVORITE</p>
+              <p class="ach-sub" id="achSubEl">CUSTOM FANTASY HIGHLIGHT CARD</p>
             </div>
           </div>
 
           <div class="poster-border-frame"></div>
         </div>
 
-        <!-- BACK FACE — clean full-bleed wallpaper -->
+        <!-- BACK FACE — just the uploaded photo, full bleed -->
         <div id="cardBack" class="card-face card-back">
           <div class="photo-wrap" id="photoWrapBack">
             <div class="photo-placeholder"><i data-lucide="image" class="w-14 h-14"></i></div>
@@ -444,20 +437,6 @@
             <div class="anime-speedlines"></div>
             <div class="anime-halftone"></div>
           </div>
-          <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,0) 28%, rgba(0,0,0,.55) 68%, rgba(0,0,0,.92) 100%);"></div>
-          <span class="ghost-number font-display" id="ghostNumber">36</span>
-          <div class="absolute top-4 left-4 px-2.5 py-1 rounded-md text-[11px] font-bold tracking-wide" style="background:var(--ink); color:#fff;" id="posBadge">G/F</div>
-          <div class="absolute top-4 right-4 text-right">
-            <p class="text-[10px] tracking-widest uppercase text-white/70">FANTASY EDITION</p>
-          </div>
-          <div class="absolute bottom-5 left-4 right-4">
-            <p class="text-[11px] tracking-[0.2em] uppercase mb-0.5" id="teamNameBack" style="color:var(--accent);">Sesame All-Stars</p>
-            <div class="flex items-end justify-between">
-              <h2 class="font-display text-3xl leading-none" id="playerNameBack">ELMO</h2>
-              <span class="font-display text-4xl leading-none opacity-90" id="numberBack">#36</span>
-            </div>
-          </div>
-          <div class="card-border-frame"></div>
         </div>
 
       </div>
@@ -500,7 +479,6 @@ function initials(name){
 function syncText(){
   const name = state.playerName.value.trim() || 'PLAYER';
   const num = state.playerNumber.value.trim() || '0';
-  const pos = state.playerPosition.value.trim() || '—';
   const team = state.teamName.value.trim() || 'FREE AGENTS';
   const opponent = state.opponentTeam.value.trim() || 'OPPONENT';
   const hn = state.headlineNumber.value.trim() || '0';
@@ -509,12 +487,6 @@ function syncText(){
   const quote = state.quoteText.value.trim();
   const achC = state.achCaption.value.trim();
   const achS = state.achSub.value.trim();
-
-  $('playerNameBack').textContent = name.toUpperCase();
-  $('numberBack').textContent = '#' + num;
-  $('ghostNumber').textContent = num;
-  $('posBadge').textContent = pos.toUpperCase();
-  $('teamNameBack').textContent = team;
 
   $('teamBadge').textContent = initials(team);
   $('teamBadgeSmall').textContent = initials(team);

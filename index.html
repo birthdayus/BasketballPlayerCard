@@ -53,7 +53,7 @@
     box-shadow: 0 25px 60px -15px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06);
   }
 
-  /* ================= FRONT — Topps-style ribbon + banner + ticket cells ================= */
+  /* ================= FRONT — clean editorial poster (photo bleeds right, text column left) ================= */
   .card-back{ transform: rotateY(180deg); }
 
   .photo-wrap{ position:absolute; inset:0; overflow:hidden; background:#1b1f29; }
@@ -68,49 +68,46 @@
     background: linear-gradient(160deg,#1b2030,#0d1017);
     color:#3a4257;
   }
-  .front-scrim{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,0) 34%, rgba(0,0,0,.42) 66%, rgba(0,0,0,.88) 100%); }
 
-  .front-chrome{ position:absolute; inset:0; pointer-events:none; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+  .card-front{ background:#F3EEE4; }
+  .poster-photo-zone{ position:absolute; top:0; right:0; bottom:0; width:52%; overflow:hidden; background:#1b1f29; }
+  .poster-photo-fade{ position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg, #F3EEE4 0%, rgba(243,238,228,.86) 12%, rgba(243,238,228,0) 42%); }
 
-  .ticket-block{ position:absolute; top:14px; left:14px; width:66%; border-radius:8px; overflow:hidden; background:rgba(255,255,255,.96); }
-  .ticket-brandrow{ display:flex; align-items:center; justify-content:space-between; background:var(--ink); color:#fff; padding:5px 9px; }
-  .ticket-brand{ font-family:'Anton'; font-size:11px; line-height:1; letter-spacing:.02em; }
-  .ticket-serial{ font-size:9px; font-weight:700; opacity:.9; }
-  .ticket-title{ font-family:'Anton'; font-size:14px; color:#1a1305; background:var(--accent); padding:5px 9px; }
-  .ticket-cells{ display:flex; }
-  .ticket-cell{ flex:1; text-align:center; padding:5px 2px 6px; border-right:1px solid rgba(0,0,0,.1); }
-  .ticket-cell:last-child{ border-right:none; }
-  .tc-label{ font-size:6.5px; letter-spacing:.06em; text-transform:uppercase; color:#6b6559; font-weight:800; }
-  .tc-value{ font-family:'Anton'; font-size:15px; color:#1a1a1a; }
+  .poster-text-col{ position:relative; height:100%; width:58%; padding:22px 10px 16px 18px; display:flex; flex-direction:column; gap:7px; }
 
-  .front-position-tag{ position:absolute; top:14px; right:14px; background:rgba(255,255,255,.96); border-radius:8px; padding:7px 12px; text-align:center; }
-  .fpt-label{ font-size:6.5px; letter-spacing:.08em; text-transform:uppercase; color:#6b6559; font-weight:800; }
-  .fpt-value{ font-family:'Anton'; font-size:16px; color:#1a1a1a; }
+  .pt-team{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#5b5346; font-weight:800; }
+  .pt-name{ line-height:.94; margin-top:2px; }
+  .pt-name-line1, .pt-name-line2{ font-family:'Anton'; font-size:36px; display:block; }
+  .pt-name-line1{ color:var(--ink); }
+  .pt-name-line2{ color:var(--accent); }
 
-  .front-signature{ position:absolute; top:50%; left:16px; right:20px; color:var(--ink); font-size:38px; line-height:1; transform:rotate(-3deg); transform-origin:left center; text-shadow:0 1px 3px rgba(255,255,255,.35); }
-  .front-certified{ position:absolute; top:calc(50% + 42px); left:20px; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.5); }
-  .front-autograph{ position:absolute; top:calc(50% + 62px); left:20px; right:20px; transform:rotate(-2deg); transform-origin:left center; }
-  .front-autograph-text{ font-family:'Permanent Marker',cursive; color:#fff; font-size:46px; line-height:1; text-shadow:0 1px 4px rgba(0,0,0,.6); }
-  .front-autograph-img{ display:block; width:260px; max-width:100%; height:auto; }
+  .pt-meta{ display:flex; align-items:center; gap:7px; margin-top:4px; }
+  .pt-badge{ width:20px; height:20px; border-radius:50%; background:var(--ink); color:#fff; font-size:8px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .pt-number{ font-family:'JetBrains Mono'; font-size:11px; color:var(--ink); font-weight:700; }
+  .pt-position{ font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:#847c6c; font-weight:700; }
 
-  .front-banner{ position:absolute; left:0; right:0; bottom:66px; background:var(--ink); color:#fff; padding:6px 16px; }
-  .banner-caption{ font-family:'Anton'; font-size:14px; line-height:1.1; }
-  .banner-sub{ font-size:8px; letter-spacing:.08em; text-transform:uppercase; opacity:.85; margin-top:1px; }
+  .pt-divider{ height:2px; width:34px; background:var(--accent); margin:2px 0; }
 
-  .front-nameplate{ position:absolute; left:0; right:0; bottom:10px; height:56px; background:#141414; display:flex; flex-direction:column; justify-content:center; padding:0 16px; }
-  .nameplate-name{ font-family:'Anton'; font-size:22px; color:#fff; letter-spacing:.01em; line-height:1; }
-  .nameplate-team{ font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-top:2px; }
+  .pt-quote-mark{ font-family:'Anton'; font-size:30px; color:var(--accent); line-height:.5; margin-bottom:2px; }
+  .pt-quote-text{ font-family:'Anton'; font-size:14px; line-height:1.2; color:#231f18; text-transform:uppercase; }
 
-  .front-crest{
-    position:absolute; bottom:8px; right:10px; width:36px; height:36px;
-    background:var(--accent); transform:rotate(45deg); border-radius:6px;
-    display:flex; align-items:center; justify-content:center;
-  }
-  .front-crest span{ transform:rotate(-45deg); font-family:'Anton'; font-size:11px; color:#1a1305; }
+  .pt-tagline{ font-size:8.5px; line-height:1.5; letter-spacing:.04em; text-transform:uppercase; color:#4a4438; font-weight:700; }
 
-  .front-corner-tag{ position:absolute; bottom:16px; right:52px; font-family:'Anton'; font-size:12px; color:#fff; opacity:.9; }
+  .pt-bio-quote{ font-size:9px; line-height:1.4; color:#4a4438; font-style:italic; }
 
-  .front-gold-strip{ position:absolute; left:0; right:0; bottom:0; height:10px; background:repeating-linear-gradient(115deg, var(--accent) 0 4px, rgba(0,0,0,.55) 4px 8px); }
+  .pt-sig-row{ display:flex; align-items:center; gap:8px; margin-top:2px; }
+  .pt-sig-text{ font-family:'Permanent Marker',cursive; color:#231f18; font-size:24px; line-height:1; }
+  .pt-sig-img{ display:block; height:32px; width:auto; max-width:130px; }
+  .pt-sig-number{ font-family:'Anton'; font-size:14px; color:var(--ink); }
+
+  .pt-stats{ display:flex; flex-direction:column; margin-top:2px; }
+  .pt-stat-row{ display:flex; align-items:baseline; gap:7px; padding:2.5px 0; border-bottom:1px solid rgba(0,0,0,.08); }
+  .pt-stat-val{ font-family:'Anton'; font-size:13px; color:var(--ink); min-width:30px; }
+  .pt-stat-label{ font-size:7px; letter-spacing:.06em; text-transform:uppercase; color:#847c6c; font-weight:700; }
+
+  .pt-footer{ margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:6px; }
+  .pt-brand{ font-family:'Anton'; font-size:9.5px; color:var(--ink); letter-spacing:.03em; }
+  .pt-serial{ font-size:7.5px; color:#847c6c; font-weight:700; }
 
   /* ================= BACK — bio + big-number comparison, Upper-Deck style ================= */
   .card-back-inner{ position:relative; height:100%; background:#F3EEE4; }
@@ -159,30 +156,6 @@
   .back-gold-strip{ margin-top:auto; height:10px; background:repeating-linear-gradient(115deg, var(--accent) 0 4px, rgba(0,0,0,.35) 4px 8px); }
 
   .card-border-frame{ position:absolute; inset:0; border-radius:22px; pointer-events:none; border:2px solid rgba(255,255,255,.32); }
-
-  /* ---- anime mode filter (clearly visible, html2canvas-safe) ---- */
-  .anime-mode .photo-wrap img{ filter: saturate(2.3) contrast(1.4) brightness(1.1); }
-  .anime-mode .anime-overlay{ opacity:1; }
-  .anime-overlay{ position:absolute; inset:0; opacity:0; pointer-events:none; transition:opacity .35s ease; }
-  .anime-wash{
-    position:absolute; inset:0;
-    background: linear-gradient(135deg, rgba(255,60,180,.4) 0%, transparent 45%, rgba(0,220,255,.4) 100%);
-    mix-blend-mode: hard-light; opacity:.55;
-  }
-  .anime-halftone{
-    position:absolute; inset:0;
-    background-image: radial-gradient(rgba(255,255,255,.65) 1.4px, transparent 1.8px);
-    background-size: 7px 7px; mix-blend-mode: overlay; opacity:.35;
-  }
-  .anime-speedlines{
-    position:absolute; inset:0;
-    background:
-      repeating-linear-gradient(70deg, rgba(255,255,255,.22) 0 2px, transparent 2px 16px),
-      repeating-linear-gradient(-70deg, rgba(255,255,255,.14) 0 1.5px, transparent 1.5px 20px);
-    mix-blend-mode: screen; opacity:.4;
-  }
-  .card-front.anime-mode .ticket-block{ border:3px solid var(--accent); box-sizing:border-box; }
-  .card-front.anime-mode .front-signature{ text-shadow: 2px 2px 0 var(--accent), -1.5px -1.5px 0 rgba(255,255,255,.5); }
 
   ::-webkit-scrollbar{ width:8px; }
   ::-webkit-scrollbar-thumb{ background:#2a2f3c; border-radius:8px; }
@@ -272,7 +245,7 @@
       </div>
       <label class="flex items-center justify-between pt-1 cursor-pointer select-none">
         <span class="text-sm flex items-center gap-2">
-          <i data-lucide="sparkles" class="w-4 h-4 text-fuchsia-400"></i> AI 動漫化濾鏡（Animated Mode）
+          <i data-lucide="shapes" class="w-4 h-4 text-fuchsia-400"></i> 低多邊形藝術濾鏡（Low-Poly Art）
         </span>
         <span class="relative shrink-0">
           <input id="animeToggle" type="checkbox" class="peer sr-only">
@@ -299,23 +272,15 @@
           <input id="serialNumber" type="text" value="1/1" maxlength="10" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
         </label>
         <label class="col-span-2 block">
-          <span class="field-label">飛紙橫額標題</span>
-          <input id="headlineLabel" type="text" value="Career Highlight" maxlength="20" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
-        </label>
-        <label class="block">
-          <span class="field-label">右下角編號</span>
-          <input id="headlineNumber" type="text" value="36" maxlength="6" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm font-mono-stat">
-        </label>
-        <label class="block">
-          <span class="field-label">簽名題字</span>
+          <span class="field-label">大字引言（簡短標語）</span>
           <input id="quoteText" type="text" value="Straight Buckets" maxlength="26" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
         <label class="col-span-2 block">
-          <span class="field-label">成就橫額標題</span>
+          <span class="field-label">標語一</span>
           <input id="achCaption" type="text" value="Fan Favorite" maxlength="24" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
         <label class="col-span-2 block">
-          <span class="field-label">成就橫額副標</span>
+          <span class="field-label">標語二</span>
           <input id="achSub" type="text" value="Custom Fantasy Highlight Card" maxlength="34" class="field-input w-full mt-1 rounded-lg px-3 py-2 text-sm">
         </label>
       </div>
@@ -416,55 +381,59 @@
 
         <!-- FRONT FACE -->
         <div id="cardFront" class="card-face card-front">
-          <div class="photo-wrap" id="photoWrapFront">
-            <div class="photo-placeholder"><i data-lucide="image" class="w-14 h-14"></i></div>
-            <img class="cardPhoto hidden" src="" alt="">
+          <div class="poster-photo-zone">
+            <div class="photo-wrap" id="photoWrapFront">
+              <div class="photo-placeholder"><i data-lucide="image" class="w-10 h-10"></i></div>
+              <img class="cardPhoto hidden" src="" alt="">
+            </div>
+            <div class="poster-photo-fade"></div>
           </div>
-          <div class="anime-overlay">
-            <div class="anime-wash"></div>
-            <div class="anime-speedlines"></div>
-            <div class="anime-halftone"></div>
-          </div>
-          <div class="front-scrim"></div>
 
-          <div class="front-chrome">
-            <div class="ticket-block">
-              <div class="ticket-brandrow">
-                <span class="ticket-brand" id="cardBrandEl">FANTASY NOW</span>
-                <span class="ticket-serial" id="serialNumberEl">1/1</span>
-              </div>
-              <div class="ticket-title" id="headlineLabelEl">Career Highlight</div>
-              <div class="ticket-cells">
-                <div class="ticket-cell"><p class="tc-label">G</p><p class="tc-value" id="tcG">82</p></div>
-                <div class="ticket-cell"><p class="tc-label">PPG</p><p class="tc-value" id="tcPPG">25.4</p></div>
-                <div class="ticket-cell"><p class="tc-label">EFF</p><p class="tc-value" id="tcEFF">28.9</p></div>
-              </div>
+          <div class="poster-text-col">
+            <p class="pt-team" id="teamNameFront">SESAME ALL-STARS</p>
+            <div class="pt-name">
+              <span class="pt-name-line1" id="nameLine1">ELMO</span>
+              <span class="pt-name-line2 hidden" id="nameLine2"></span>
+            </div>
+            <div class="pt-meta">
+              <span class="pt-badge" id="teamBadgeFront">SA</span>
+              <span class="pt-number" id="numberTagEl">#36</span>
+              <span class="pt-position" id="posTagEl">G/F</span>
             </div>
 
-            <div class="front-position-tag">
-              <p class="fpt-label">Pos</p>
-              <p class="fpt-value" id="posTagEl">G/F</p>
+            <div class="pt-divider"></div>
+
+            <div>
+              <p class="pt-quote-mark">&ldquo;</p>
+              <p class="pt-quote-text" id="quoteTextEl">STRAIGHT BUCKETS</p>
             </div>
 
-            <div class="front-signature font-script" id="quoteTextEl">Straight Buckets</div>
-            <p class="front-certified">Fantasy Certified Autograph</p>
-            <div class="front-autograph">
-              <span class="front-autograph-text" id="autographNameEl">Elmo</span>
-              <img class="front-autograph-img hidden" id="autographImgEl" src="" alt="">
+            <p class="pt-tagline" id="taglineEl">FAN FAVORITE. CUSTOM FANTASY HIGHLIGHT CARD.</p>
+
+            <p class="pt-bio-quote" id="bioQuoteEl">&ldquo;Elmo learned the crossover before the alphabet.&rdquo;</p>
+
+            <div class="pt-sig-row">
+              <span class="pt-sig-text" id="autographNameEl">Elmo</span>
+              <img class="pt-sig-img hidden" id="autographImgEl" src="" alt="">
+              <span class="pt-sig-number" id="sigNumberEl">#36</span>
             </div>
 
-            <div class="front-banner">
-              <p class="banner-caption" id="achCaptionEl">FAN FAVORITE</p>
-              <p class="banner-sub" id="achSubEl">CUSTOM FANTASY HIGHLIGHT CARD</p>
+            <div class="pt-divider"></div>
+
+            <div id="frontStatsSection" class="pt-stats">
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowG">82</span><span class="pt-stat-label">Games</span></div>
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowPPG">25.4</span><span class="pt-stat-label">PPG</span></div>
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowRPG">6.8</span><span class="pt-stat-label">RPG</span></div>
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowAPG">5.2</span><span class="pt-stat-label">APG</span></div>
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowSPG">1.5</span><span class="pt-stat-label">SPG</span></div>
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowBPG">0.7</span><span class="pt-stat-label">BPG</span></div>
+              <div class="pt-stat-row"><span class="pt-stat-val font-display" id="frontRowEFF">28.9</span><span class="pt-stat-label">EFF</span></div>
             </div>
 
-            <div class="front-nameplate">
-              <span class="nameplate-name" id="playerNameFront">ELMO</span>
-              <span class="nameplate-team" id="teamNameFront">SESAME ALL-STARS</span>
+            <div class="pt-footer">
+              <span class="pt-brand" id="cardBrandEl">FANTASY NOW</span>
+              <span class="pt-serial" id="serialNumberEl">1/1</span>
             </div>
-            <span class="front-corner-tag" id="headlineNumberEl">36</span>
-            <div class="front-crest"><span id="teamBadgeFront">SA</span></div>
-            <div class="front-gold-strip"></div>
           </div>
 
           <div class="card-border-frame"></div>
@@ -548,7 +517,6 @@ const state = {
   photoScale: $('photoScale'), photoOffsetX: $('photoOffsetX'), photoOffsetY: $('photoOffsetY'),
   animeToggle: $('animeToggle'), statsToggle: $('statsToggle'),
   cardBrand: $('cardBrand'), serialNumber: $('serialNumber'),
-  headlineNumber: $('headlineNumber'), headlineLabel: $('headlineLabel'),
   quoteText: $('quoteText'), achCaption: $('achCaption'), achSub: $('achSub'),
   gameMeta: $('gameMeta'), opponentTeam: $('opponentTeam'), homeScore: $('homeScore'), awayScore: $('awayScore'),
   bioText: $('bioText'),
@@ -572,6 +540,21 @@ function initials(name){
   return parts.map(w=>w[0]).slice(0,2).join('').toUpperCase();
 }
 
+function updateNameLines(name){
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  const line1El = $('nameLine1');
+  const line2El = $('nameLine2');
+  if(parts.length >= 2){
+    line1El.textContent = parts[0].toUpperCase();
+    line2El.textContent = parts.slice(1).join(' ').toUpperCase();
+    line2El.classList.remove('hidden');
+  } else {
+    line1El.textContent = (parts[0] || 'PLAYER').toUpperCase();
+    line2El.textContent = '';
+    line2El.classList.add('hidden');
+  }
+}
+
 function syncText(){
   const name = state.playerName.value.trim() || 'PLAYER';
   const num = state.playerNumber.value.trim() || '0';
@@ -581,9 +564,13 @@ function syncText(){
   const hs = state.homeScore.value || '0';
   const as = state.awayScore.value || '0';
   const bio = state.bioText.value.trim();
+  const achC = state.achCaption.value.trim();
+  const achS = state.achSub.value.trim();
 
-  $('playerNameFront').textContent = name.toUpperCase();
+  updateNameLines(name);
   $('autographNameEl').textContent = name;
+  $('sigNumberEl').textContent = '#' + num;
+  $('numberTagEl').textContent = '#' + num;
   $('teamNameFront').textContent = team.toUpperCase();
   $('posTagEl').textContent = state.playerPosition.value.trim().toUpperCase() || '—';
   $('teamBadgeFront').textContent = initials(team);
@@ -592,11 +579,9 @@ function syncText(){
 
   $('cardBrandEl').textContent = state.cardBrand.value.trim().toUpperCase() || 'FANTASY NOW';
   $('serialNumberEl').textContent = state.serialNumber.value.trim() || '1/1';
-  $('headlineLabelEl').textContent = state.headlineLabel.value.trim() || 'HIGHLIGHT';
-  $('headlineNumberEl').textContent = state.headlineNumber.value.trim() || num;
-  $('quoteTextEl').textContent = state.quoteText.value.trim() || 'Straight Buckets';
-  $('achCaptionEl').textContent = state.achCaption.value.trim().toUpperCase();
-  $('achSubEl').textContent = state.achSub.value.trim().toUpperCase();
+  $('quoteTextEl').textContent = (state.quoteText.value.trim() || 'Straight Buckets').toUpperCase();
+  $('taglineEl').textContent = [achC, achS].filter(Boolean).join('. ').toUpperCase() + (achC || achS ? '.' : '');
+  $('bioQuoteEl').textContent = bio ? `\u201C${bio}\u201D` : '';
 
   $('bioTextEl').textContent = bio;
   $('matchupLine').textContent = `${meta.toUpperCase()} · W ${hs}–${as} VS ${opponent.toUpperCase()}`;
@@ -613,9 +598,13 @@ function syncText(){
 }
 
 function syncStats(){
-  $('tcG').textContent = state.statG.value;
-  $('tcPPG').textContent = state.statPPG.value;
-  $('tcEFF').textContent = state.statEFF.value;
+  $('frontRowG').textContent = state.statG.value;
+  $('frontRowPPG').textContent = state.statPPG.value;
+  $('frontRowRPG').textContent = state.statRPG.value;
+  $('frontRowAPG').textContent = state.statAPG.value;
+  $('frontRowSPG').textContent = state.statSPG.value;
+  $('frontRowBPG').textContent = state.statBPG.value;
+  $('frontRowEFF').textContent = state.statEFF.value;
   $('heroPPG').textContent = state.statPPG.value;
   $('heroRPG').textContent = state.statRPG.value;
   $('heroEFF').textContent = state.statEFF.value;
@@ -638,15 +627,92 @@ function syncPhotoTransform(){
   $('offsetYVal').textContent = oy;
 }
 
-function syncAnimeMode(){
-  const on = state.animeToggle.checked;
-  cardFront.classList.toggle('anime-mode', on);
-  cardBack.classList.toggle('anime-mode', on);
+let originalPhotoDataURL = null;
+
+function applyPhotoStyle(){
+  if(!originalPhotoDataURL) return;
+  if(state.animeToggle.checked){
+    generateLowPoly(originalPhotoDataURL, (dataUrl) => {
+      document.querySelectorAll('img.cardPhoto').forEach(img => { img.src = dataUrl; });
+    });
+  } else {
+    document.querySelectorAll('img.cardPhoto').forEach(img => { img.src = originalPhotoDataURL; });
+  }
+}
+
+// generate a low-poly / faceted-geometric version of an image using canvas triangulation
+function generateLowPoly(srcDataUrl, callback){
+  const srcImg = new Image();
+  srcImg.onload = () => {
+    const maxDim = 480;
+    const ratio = Math.min(1, maxDim / Math.max(srcImg.width, srcImg.height));
+    const w = Math.max(1, Math.round(srcImg.width * ratio));
+    const h = Math.max(1, Math.round(srcImg.height * ratio));
+
+    const srcCanvas = document.createElement('canvas');
+    srcCanvas.width = w; srcCanvas.height = h;
+    const srcCtx = srcCanvas.getContext('2d');
+    srcCtx.drawImage(srcImg, 0, 0, w, h);
+    const imgData = srcCtx.getImageData(0, 0, w, h).data;
+
+    function colorAt(x, y){
+      const cx = Math.max(0, Math.min(w - 1, Math.round(x)));
+      const cy = Math.max(0, Math.min(h - 1, Math.round(y)));
+      const i = (cy * w + cx) * 4;
+      return [imgData[i], imgData[i + 1], imgData[i + 2]];
+    }
+
+    const cell = 20;
+    const cols = Math.ceil(w / cell);
+    const rows = Math.ceil(h / cell);
+    const pts = [];
+    for(let r = 0; r <= rows; r++){
+      pts[r] = [];
+      for(let c = 0; c <= cols; c++){
+        let px = c * cell, py = r * cell;
+        if(r > 0 && r < rows) py += (Math.random() - 0.5) * cell * 0.75;
+        if(c > 0 && c < cols) px += (Math.random() - 0.5) * cell * 0.75;
+        pts[r][c] = [Math.max(0, Math.min(w, px)), Math.max(0, Math.min(h, py))];
+      }
+    }
+
+    const outCanvas = document.createElement('canvas');
+    outCanvas.width = w; outCanvas.height = h;
+    const outCtx = outCanvas.getContext('2d');
+
+    function drawTri(p1, p2, p3){
+      const cx = (p1[0] + p2[0] + p3[0]) / 3;
+      const cy = (p1[1] + p2[1] + p3[1]) / 3;
+      const [r, g, b] = colorAt(cx, cy);
+      outCtx.beginPath();
+      outCtx.moveTo(p1[0], p1[1]);
+      outCtx.lineTo(p2[0], p2[1]);
+      outCtx.lineTo(p3[0], p3[1]);
+      outCtx.closePath();
+      outCtx.fillStyle = `rgb(${r},${g},${b})`;
+      outCtx.fill();
+      outCtx.strokeStyle = `rgba(${Math.max(0,r-25)},${Math.max(0,g-25)},${Math.max(0,b-25)},0.5)`;
+      outCtx.lineWidth = 0.6;
+      outCtx.stroke();
+    }
+
+    for(let r = 0; r < rows; r++){
+      for(let c = 0; c < cols; c++){
+        const a = pts[r][c], b = pts[r][c + 1], d = pts[r + 1][c], e = pts[r + 1][c + 1];
+        if(Math.random() < 0.5){ drawTri(a, b, e); drawTri(a, e, d); }
+        else { drawTri(a, b, d); drawTri(b, e, d); }
+      }
+    }
+
+    callback(outCanvas.toDataURL('image/jpeg', 0.92));
+  };
+  srcImg.src = srcDataUrl;
 }
 
 function syncStatsVisibility(){
   const on = state.statsToggle.checked;
   $('statsFields').classList.toggle('hidden', !on);
+  $('frontStatsSection').classList.toggle('hidden', !on);
   $('posterStatsSection').classList.toggle('hidden', !on);
 }
 
@@ -714,7 +780,7 @@ $('clearSignatureBtn').addEventListener('click', () => {
 });
 
 [state.playerName, state.playerNumber, state.playerPosition, state.teamName, state.teamColor, state.accentColor,
- state.cardBrand, state.serialNumber, state.headlineNumber, state.headlineLabel, state.quoteText,
+ state.cardBrand, state.serialNumber, state.quoteText,
  state.achCaption, state.achSub, state.gameMeta, state.opponentTeam, state.homeScore, state.awayScore, state.bioText]
   .forEach(el => el.addEventListener('input', syncText));
 
@@ -724,7 +790,7 @@ $('clearSignatureBtn').addEventListener('click', () => {
 [state.photoScale, state.photoOffsetX, state.photoOffsetY]
   .forEach(el => el.addEventListener('input', syncPhotoTransform));
 
-state.animeToggle.addEventListener('change', syncAnimeMode);
+state.animeToggle.addEventListener('change', applyPhotoStyle);
 state.statsToggle.addEventListener('change', syncStatsVisibility);
 
 $('photoUpload').addEventListener('change', (e) => {
@@ -732,11 +798,10 @@ $('photoUpload').addEventListener('change', (e) => {
   if(!file) return;
   const reader = new FileReader();
   reader.onload = (ev) => {
-    document.querySelectorAll('img.cardPhoto').forEach(img => {
-      img.src = ev.target.result;
-      img.classList.remove('hidden');
-    });
+    originalPhotoDataURL = ev.target.result;
     document.querySelectorAll('.photo-placeholder').forEach(p => p.classList.add('hidden'));
+    document.querySelectorAll('img.cardPhoto').forEach(img => img.classList.remove('hidden'));
+    applyPhotoStyle();
     $('uploadLabel').textContent = file.name.length > 22 ? file.name.slice(0,20) + '…' : file.name;
   };
   reader.readAsDataURL(file);
